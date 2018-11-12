@@ -1,33 +1,53 @@
 package Projeto;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
-public class Menu extends JFrame {
+public class Menu {
 
-    JButton resumir = new JButton("Resumir");
-
-    JButton opcoes = new JButton("Opções");
-
-    JButton menu = new JButton("Menu");
-
-    JButton salvaresair = new JButton("Salvar e Sair");
-
-    JButton sair = new JButton("Sair");
-
-    public Menu() {
-        setSize(200, 100);
-
-        setLayout(new GridLayout(1, 5));
-        add(resumir);
-        add(opcoes);
-        add(menu);
-        add(salvaresair);
-        add(sair);
-
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
+    public static void drawMenu(Graphics2D g, Projeto pr) {
+        
+        Rectangle b1 = new Rectangle(pr.getWidth()/2 - pr.getWidth()/8, pr.getHeight()/8, pr.getWidth()/4, pr.getWidth()/32);
+        Rectangle b2 = new Rectangle(pr.getWidth()/2 - pr.getWidth()/8, 2*pr.getHeight()/8, pr.getWidth()/4, pr.getWidth()/32);
+        Rectangle b3 = new Rectangle(pr.getWidth()/2 - pr.getWidth()/8,3* pr.getHeight()/8, pr.getWidth()/4, pr.getWidth()/32);
+        Rectangle b4 = new Rectangle(pr.getWidth()/2 - pr.getWidth()/8, 4*pr.getHeight()/8, pr.getWidth()/4, pr.getWidth()/32);
+        Rectangle b5 = new Rectangle(pr.getWidth()/2 - pr.getWidth()/8, 5*pr.getHeight()/8, pr.getWidth()/4, pr.getWidth()/32);
+        
+        if (b1.contains(pr.lis.mx, pr.lis.my)) {
+            g.setColor(Color.white);
+        }else{
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(b1);
+        
+        if (b2.contains(pr.lis.mx, pr.lis.my)) {
+            g.setColor(Color.white);
+        }else{
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(b2);
+        
+        if (b3.contains(pr.lis.mx, pr.lis.my)) {
+            g.setColor(Color.white);
+        }else{
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(b3);
+        
+        if (b4.contains(pr.lis.mx, pr.lis.my)) {
+            g.setColor(Color.white);
+        }else{
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(b4);
+        
+        if (b5.contains(pr.lis.mx, pr.lis.my)) {
+            g.setColor(Color.white);
+        }else{
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(b5);
+        
     }
 }

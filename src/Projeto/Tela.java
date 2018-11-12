@@ -13,13 +13,15 @@ public class Tela {
 
     public void update() {
         Graphics2D g = pr.image.createGraphics();
-        
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
-        
-        g.setColor(Color.red);
-        g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
-        
+        if (pr.lis.stop) {
+            Menu.drawMenu(g, pr);
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
+            
+            g.setColor(Color.red);
+            g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
+        }
         g.dispose();
     }
 }
