@@ -6,11 +6,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class Listeners implements MouseListener,KeyListener,MouseMotionListener{
-    boolean up=false,down=false,left=false,right=false,stop=false;
-    int moveSpeed = 5,mx=0,my=0;
-    
-    
+public class Listeners implements MouseListener, KeyListener, MouseMotionListener {
+
+    boolean up = false, down = false, left = false, right = false, stop = false;
+
+    int moveSpeed = 5, mx = 0, my = 0;
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -37,35 +38,35 @@ public class Listeners implements MouseListener,KeyListener,MouseMotionListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             stop = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_W){
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             up = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             left = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_S){
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             down = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_D){
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_W){
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             up = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_S){
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             down = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_D){
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
     }
@@ -79,5 +80,5 @@ public class Listeners implements MouseListener,KeyListener,MouseMotionListener{
         mx = e.getX();
         my = e.getY();
     }
-    
+
 }
