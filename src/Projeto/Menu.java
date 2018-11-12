@@ -10,16 +10,32 @@ public class Menu extends JFrame {
     
     JButton opcoes = new JButton("Opções");
     
+    JButton menu = new JButton("Menu");
+    
     JButton salvaresair = new JButton("Salvar e Sair");
     
     JButton sair = new JButton("Sair");
     
     public Menu() {
-        setLayout(new GridLayout(1,4));
+        setSize(200, 100);
+
+        
+        
+        setLayout(new GridLayout(1,5));
         add(resumir);
         add(opcoes);
+        add(menu);
         add(salvaresair);
         add(sair);
+        
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+    }
+    
+    public void main() {
+        Menu teste = new Menu();
+        
     }
     
 }

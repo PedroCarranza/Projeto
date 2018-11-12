@@ -49,7 +49,7 @@ public class Projeto extends JFrame implements Runnable {
     public synchronized void stop() {
         running = false;
         try {
-            thread.wait();
+            thread.stop();
         } catch (InterruptedException e) {
             System.err.println("Deu ruim");
         }
