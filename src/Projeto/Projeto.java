@@ -23,18 +23,19 @@ public class Projeto extends JFrame implements Runnable {
 
     public Projeto() {
         setSize(1280, 720);
-        
+
         thread = new Thread(this);
-        
+
         tela = new Tela(this);
-        
+
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        
+
         lis = new Listeners();
         addKeyListener(lis);
         addMouseListener(lis);
         addMouseMotionListener(lis);
-        
+
+        setResizable(false);
         setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
         setLocationRelativeTo(null);
         setVisible(true);
@@ -48,7 +49,7 @@ public class Projeto extends JFrame implements Runnable {
     public synchronized void stop() {
         running = false;
         try {
-            thread.join();
+            thread.wait();
         } catch (InterruptedException e) {
             System.err.println("Deu ruim");
         }

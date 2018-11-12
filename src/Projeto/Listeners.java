@@ -39,7 +39,12 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            stop = true;
+            if (stop) {
+                stop = false;
+            } else {
+                
+                stop = true;
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_W) {
             up = true;
