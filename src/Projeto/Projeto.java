@@ -10,22 +10,32 @@ import javax.swing.JFrame;
 public class Projeto extends JFrame implements Runnable {
 
     boolean running;
+
     Thread thread;
+
     BufferedImage image;
+
     Listeners lis;
+
     Tela tela;
 
     @SuppressWarnings("")
+
     public Projeto() {
         setSize(1280, 720);
+        
         thread = new Thread(this);
+        
         tela = new Tela(this);
+        
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        
         lis = new Listeners();
         addKeyListener(lis);
         addMouseListener(lis);
         addMouseMotionListener(lis);
-        setDefaultCloseOperation(3);
+        
+        setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -59,7 +69,7 @@ public class Projeto extends JFrame implements Runnable {
     public void run() {
         Instant last = Instant.now();
         Instant now;
-        final double ns = 1000000000.0 / 60.0;//60 frames por segundo
+        final double ns = 1000000000.0 / 60.0; //60 frames por segundo
         double delta = 0;
         requestFocus();
         while (running) {
@@ -77,7 +87,7 @@ public class Projeto extends JFrame implements Runnable {
             render();//sempre renderiza na tela
         }
     }
-    
+
     public static void main(String[] args) {
         Projeto proj = new Projeto();
         proj.start();
