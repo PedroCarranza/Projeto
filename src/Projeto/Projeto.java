@@ -89,14 +89,15 @@ public class Projeto extends JFrame implements Runnable {
             now = Instant.now();
             if (!lis.stop) {
                 delta += Duration.between(last, now).getNano() / ns;
+            }else{
+                tela.updatePaused();
             }
             last = Instant.now();
             while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo
                 //logica que depende do tempo aqui
-                
+                tela.update();
                 delta--;
             }
-            tela.update();
             render();//sempre renderiza na tela
         }
     }
