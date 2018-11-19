@@ -11,8 +11,13 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
 
     boolean up = false, down = false, left = false, right = false, stop = false;
 
+<<<<<<< HEAD
     int moveSpeed = 5, mx = 0, my = 0;
 
+=======
+    int mx = 0, my = 0;
+    
+>>>>>>> 6835f8fcc9905137680bfc10ecbb7e99ae6cb183
     Projeto pr;
 
     public Listeners(Projeto p) {
