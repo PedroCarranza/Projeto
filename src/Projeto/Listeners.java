@@ -11,13 +11,23 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     boolean up = false, down = false, left = false, right = false, stop = false;
 
     int moveSpeed = 5, mx = 0, my = 0;
+    
+    Projeto pr;
+    
+    public  Listeners(Projeto p){
+        pr = p;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if(pr.tela.men.b4.contains(e.getPoint())){
+            System.exit(0);
+        }
     }
 
     @Override

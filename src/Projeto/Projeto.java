@@ -41,7 +41,7 @@ public class Projeto extends JFrame implements Runnable {
             
         });
 
-        lis = new Listeners();
+        lis = new Listeners(this);
         addKeyListener(lis);
         addMouseListener(lis);
         addMouseMotionListener(lis);

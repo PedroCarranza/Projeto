@@ -8,18 +8,22 @@ import java.awt.Rectangle;
 public class Menu {
 
     Projeto pr;
+    Rectangle b1;
+    Rectangle b2;
+    Rectangle b3;
+    Rectangle b4;
+    Rectangle b5;
 
     public Menu(Projeto pj) {
         pr = pj;
-    }
+        b1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b4 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 4 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b5 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 5 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+    }  
 
-    Rectangle b1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-    Rectangle b2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-    Rectangle b3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-    Rectangle b4 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 4 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-    Rectangle b5 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 5 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-
-    public void drawMenu(Graphics2D g, Projeto pr) {
+    public void drawMenu(Graphics2D g) {
 
         FontMetrics fonte = g.getFontMetrics(g.getFont());
 
