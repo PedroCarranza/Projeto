@@ -64,43 +64,44 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
             pr.image = new BufferedImage(720, 480, BufferedImage.TYPE_INT_RGB);
             pr.setSize(720, 480);
             pr.tela.men.dopcoes = false;
-            pr.tela.update();
             acaofeita = true;
             pr.tela.men.updateMenu();
             pr.setLocationRelativeTo(null);
+            pr.tela.update();
         }
         if (pr.tela.men.d2.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
             pr.setSize(800, 600);
             pr.tela.men.dopcoes = false;
-            pr.tela.update();
             acaofeita = true;
             pr.tela.men.updateMenu();
             pr.setLocationRelativeTo(null);
+            pr.tela.update();
         }
         if (pr.tela.men.d3.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(1280, 720, BufferedImage.TYPE_INT_RGB);
             pr.setSize(1280, 720);
             pr.tela.men.dopcoes = false;
-            pr.tela.update();
             acaofeita = true;
             pr.tela.men.updateMenu();
             pr.setLocationRelativeTo(null);
+            pr.tela.update();
         }
         if (pr.tela.men.d4.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB);
             pr.setSize(1920, 1080);
             pr.tela.men.dopcoes = false;
-            pr.tela.update();
             acaofeita = true;
             pr.tela.men.updateMenu();
             pr.setLocationRelativeTo(null);
+            pr.tela.update();
         }
         if (pr.tela.men.d5.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.tela.men.dopcoes = false;
             pr.tela.update();
             acaofeita = true;
         }
+        pr.tela.update();
     }
 
     @Override

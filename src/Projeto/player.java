@@ -11,6 +11,7 @@ public class player {
     Projeto pr;
     BufferedImage sprites;
     int frame = 0, moveSpeed = 5;
+    int scaler = 2;
     public player(Projeto p){
         pr = p;
         p1Pos = new int[2];
@@ -24,6 +25,8 @@ public class player {
     }
     
     public void updatePlayer(Graphics2D g){
+        scaler = pr.getHeight()/360;
+        moveSpeed = 3*scaler;
         frame++;
         if (frame > 9) {
             frame = 0;
@@ -42,21 +45,21 @@ public class player {
         }
         if (pr.lis.up && !pr.lis.down) {
             if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 5, 43, 35), p1Pos[0], p1Pos[1], 43 * 2, 35 * 2, null);
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 5, 43, 35), p1Pos[0], p1Pos[1], 43 * scaler, 35 * scaler, null);
             } else {
-                g.drawImage(sprites.getSubimage(321, 5, 36, 35), p1Pos[0] + 12, p1Pos[1], 36 * 2, 35 * 2, null);
+                g.drawImage(sprites.getSubimage(321, 5, 36, 35), p1Pos[0] + 12, p1Pos[1], 36 * scaler, 35 * scaler, null);
             }
         } else if (!pr.lis.up && pr.lis.down) {
             if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 89, 43, 39), p1Pos[0], p1Pos[1], 43 * 2, 39 * 2, null);
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 89, 43, 39), p1Pos[0], p1Pos[1], 43 * scaler, 39 * scaler, null);
             } else {
-                g.drawImage(sprites.getSubimage(321, 89, 36, 39), p1Pos[0] + 12, p1Pos[1], 36 * 2, 39 * 2, null);
+                g.drawImage(sprites.getSubimage(321, 89, 36, 39), p1Pos[0] + 12, p1Pos[1], 36 * scaler, 39 * scaler, null);
             }
         } else {
             if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 42, 43, 39), p1Pos[0], p1Pos[1], 43 * 2, 39 * 2, null);
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 42, 43, 39), p1Pos[0], p1Pos[1], 43 * scaler, 39 * scaler, null);
             } else {
-                g.drawImage(sprites.getSubimage(321, 42, 36, 39), p1Pos[0] + 12, p1Pos[1], 36 * 2, 39 * 2, null);
+                g.drawImage(sprites.getSubimage(321, 42, 36, 39), p1Pos[0] + 12, p1Pos[1], 36 * scaler, 39 * scaler, null);
             }
         }
     }

@@ -30,8 +30,8 @@ public class Tela {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
-        g.setColor(Color.red);
-        g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
+        //g.setColor(Color.red);
+        //g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
         
         p1.updatePlayer(g);
 

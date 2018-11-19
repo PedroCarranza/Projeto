@@ -1,6 +1,9 @@
 package Projeto;
 
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferStrategy;
@@ -20,6 +23,10 @@ public class Projeto extends JFrame implements Runnable {
     Listeners lis;
 
     Tela tela;
+    
+    BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+    Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+    Cursor oldCursor;
 
     @SuppressWarnings("")
 
@@ -40,6 +47,8 @@ public class Projeto extends JFrame implements Runnable {
             }
             
         });
+        
+        oldCursor = getContentPane().getCursor();
 
         lis = new Listeners(this);
         addKeyListener(lis);
@@ -89,8 +98,10 @@ public class Projeto extends JFrame implements Runnable {
             now = Instant.now();
             if (!lis.stop) {
                 delta += Duration.between(last, now).getNano() / ns;
+                getContentPane().setCursor(blankCursor);
             }else{
                 tela.updatePaused();
+                getContentPane().setCursor(oldCursor);
             }
             last = Instant.now();
             while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo
