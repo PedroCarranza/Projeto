@@ -1,6 +1,8 @@
 package Projeto;
 
 import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
@@ -29,6 +31,15 @@ public class Projeto extends JFrame implements Runnable {
         tela = new Tela(this);
 
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        
+        
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+            }
+            
+        });
 
         lis = new Listeners();
         addKeyListener(lis);
@@ -36,6 +47,7 @@ public class Projeto extends JFrame implements Runnable {
         addMouseMotionListener(lis);
 
         setResizable(false);
+        setUndecorated(true);
         setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
         setLocationRelativeTo(null);
         setVisible(true);
@@ -74,17 +86,17 @@ public class Projeto extends JFrame implements Runnable {
         double delta = 0;
         requestFocus();
         while (running) {
-            if (lis.stop) {
-                stop();
-            }
             now = Instant.now();
-            delta += Duration.between(last, now).getNano() / ns;
+            if (!lis.stop) {
+                delta += Duration.between(last, now).getNano() / ns;
+            }
             last = Instant.now();
-            while (delta > 0) {//garante que roda 60 vezes por segundo
+            while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo
                 //logica que depende do tempo aqui
-                tela.update();
+                
                 delta--;
             }
+            tela.update();
             render();//sempre renderiza na tela
         }
     }
