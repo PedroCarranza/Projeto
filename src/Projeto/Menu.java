@@ -45,6 +45,23 @@ public class Menu {
         d5 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 5 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
     }
 
+    public void updateMenu() {
+        b1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        b4 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 4 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+
+        c1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        c2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        c3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+
+        d1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        d2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        d3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        d4 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 4 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+        d5 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 5 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+    }
+
     public void drawMenu(Graphics2D g) {
 
         FontMetrics fonte = g.getFontMetrics(g.getFont());

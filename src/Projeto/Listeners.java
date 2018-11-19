@@ -12,7 +12,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     boolean up = false, down = false, left = false, right = false, stop = false;
 
     int moveSpeed = 5, mx = 0, my = 0;
-    
+
     Projeto pr;
 
     public Listeners(Projeto p) {
@@ -66,6 +66,8 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
             pr.tela.men.dopcoes = false;
             pr.tela.update();
             acaofeita = true;
+            pr.tela.men.updateMenu();
+            pr.setLocationRelativeTo(null);
         }
         if (pr.tela.men.d2.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
@@ -73,6 +75,8 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
             pr.tela.men.dopcoes = false;
             pr.tela.update();
             acaofeita = true;
+            pr.tela.men.updateMenu();
+            pr.setLocationRelativeTo(null);
         }
         if (pr.tela.men.d3.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(1280, 720, BufferedImage.TYPE_INT_RGB);
@@ -80,6 +84,8 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
             pr.tela.men.dopcoes = false;
             pr.tela.update();
             acaofeita = true;
+            pr.tela.men.updateMenu();
+            pr.setLocationRelativeTo(null);
         }
         if (pr.tela.men.d4.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.image = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB);
@@ -87,6 +93,8 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
             pr.tela.men.dopcoes = false;
             pr.tela.update();
             acaofeita = true;
+            pr.tela.men.updateMenu();
+            pr.setLocationRelativeTo(null);
         }
         if (pr.tela.men.d5.contains(e.getPoint()) && pr.tela.men.dopcoes && !acaofeita) {
             pr.tela.men.dopcoes = false;
