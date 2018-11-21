@@ -43,6 +43,8 @@ public class Projeto extends JFrame implements Runnable {
             @Override
             public void componentResized(ComponentEvent e) {
                 image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                tela.p1.p1Pos[0] = 10;
+                tela.p1.p1Pos[1] = getHeight() / 2;
             }
 
         });
@@ -95,18 +97,12 @@ public class Projeto extends JFrame implements Runnable {
         requestFocus();
         while (running) {
             now = Instant.now();
-            if (tela.comeco) {
-                tela.noComeco();
-                getContentPane().setCursor(oldCursor);
+            if (tela.estadoTela == 10) {
+                delta += Duration.between(last, now).getNano() / ns;
+                getContentPane().setCursor(blankCursor);
             } else {
-
-                if (!lis.stop) {
-                    delta += Duration.between(last, now).getNano() / ns;
-                    getContentPane().setCursor(blankCursor);
-                } else {
-                    tela.updatePaused();
-                    getContentPane().setCursor(oldCursor);
-                }
+                tela.updatePaused();
+                getContentPane().setCursor(oldCursor);
             }
             last = Instant.now();
             while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo

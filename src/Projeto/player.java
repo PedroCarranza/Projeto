@@ -31,13 +31,13 @@ public class player {
         if (frame > 9) {
             frame = 0;
         }
-        if (pr.lis.right && p1Pos[0] + 100 + moveSpeed < pr.getWidth()) {
+        if (pr.lis.right && p1Pos[0] + 43 * scaler + moveSpeed < pr.getWidth()) {
             p1Pos[0] += moveSpeed;
         }
         if (pr.lis.left && p1Pos[0] - moveSpeed > 0) {
             p1Pos[0] -= moveSpeed;
         }
-        if (pr.lis.down && p1Pos[1] + 78 + moveSpeed < pr.getHeight()) {
+        if (pr.lis.down && p1Pos[1] + 39 * scaler+ moveSpeed < pr.getHeight()) {
             p1Pos[1] += moveSpeed;
         }
         if (pr.lis.up && p1Pos[1] - moveSpeed > 0) {

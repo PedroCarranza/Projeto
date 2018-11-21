@@ -13,15 +13,15 @@ public class Tela {
 
     Menu men;
 
-    TelaInicial inicio;
-
     player p1;
 
     BufferedImage background;
 
     int bgdx = 0;
 
-    boolean down = false, comeco = true;
+    boolean down = false;
+    
+    int estadoTela = 0;
 
     public Tela(Projeto p) {
 
@@ -30,8 +30,6 @@ public class Tela {
         men = new Menu(pr);
 
         p1 = new player(pr);
-
-        inicio = new TelaInicial(pr);
 
         try {
             background = ImageIO.read(new File("back.png"));
@@ -43,13 +41,29 @@ public class Tela {
 
     public void updatePaused() {
         Graphics2D g = pr.image.createGraphics();
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
+        if(men.btns.isEmpty()){
+            men.btns.add(new Botao("resumir", pr));
+            men.btns.add(new Botao("Opções", pr));
+            men.btns.add(new Botao("Menu", pr));
+            men.btns.add(new Botao("Sair", pr));
+        }
         men.drawMenu(g);
         g.dispose();
     }
 
     public void noComeco() {
         Graphics2D g = pr.image.createGraphics();
-        inicio.drawTela(g);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
+        if(men.btns.isEmpty()){
+            men.btns.add(new Botao("Um Jogador", pr));
+            men.btns.add(new Botao("LAN", pr));
+            men.btns.add(new Botao("Opções", pr));
+            men.btns.add(new Botao("Sair", pr));
+        }
+        men.drawMenu(g);
         g.dispose();
     }
 
