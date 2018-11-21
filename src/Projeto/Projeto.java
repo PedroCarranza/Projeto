@@ -23,7 +23,7 @@ public class Projeto extends JFrame implements Runnable {
     Listeners lis;
 
     Tela tela;
-    
+
     BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
     Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
     Cursor oldCursor;
@@ -38,16 +38,15 @@ public class Projeto extends JFrame implements Runnable {
         tela = new Tela(this);
 
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        
-        
+
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
             }
-            
+
         });
-        
+
         oldCursor = getContentPane().getCursor();
 
         lis = new Listeners(this);
@@ -96,12 +95,18 @@ public class Projeto extends JFrame implements Runnable {
         requestFocus();
         while (running) {
             now = Instant.now();
-            if (!lis.stop) {
-                delta += Duration.between(last, now).getNano() / ns;
-                getContentPane().setCursor(blankCursor);
-            }else{
-                tela.updatePaused();
+            if (tela.comeco) {
+                tela.noComeco();
                 getContentPane().setCursor(oldCursor);
+            } else {
+
+                if (!lis.stop) {
+                    delta += Duration.between(last, now).getNano() / ns;
+                    getContentPane().setCursor(blankCursor);
+                } else {
+                    tela.updatePaused();
+                    getContentPane().setCursor(oldCursor);
+                }
             }
             last = Instant.now();
             while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo

@@ -16,7 +16,6 @@ public class Menu {
 
     Rectangle c1;
     Rectangle c2;
-    Rectangle c3;
 
     Rectangle d1;
     Rectangle d2;
@@ -36,7 +35,6 @@ public class Menu {
 
         c1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
         c2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-        c3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
 
         d1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
         d2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
@@ -53,7 +51,6 @@ public class Menu {
 
         c1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
         c2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
-        c3 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 3 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
 
         d1 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
         d2 = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 2 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
@@ -83,16 +80,7 @@ public class Menu {
             }
             g.fill(c2);
             g.setColor(Color.BLACK);
-            g.drawString("Entrar", c2.x + (c2.width - fonte.stringWidth("Entrar")) / 2, c2.y + (c2.height - fonte.getHeight()) / 2 + fonte.getAscent());
-
-            if (c3.contains(pr.lis.mx, pr.lis.my)) {
-                g.setColor(Color.WHITE);
-            } else {
-                g.setColor(Color.LIGHT_GRAY);
-            }
-            g.fill(c3);
-            g.setColor(Color.BLACK);
-            g.drawString("Voltar", c3.x + (c3.width - fonte.stringWidth("LAN")) / 2, c3.y + (c3.height - fonte.getHeight()) / 2 + fonte.getAscent());
+            g.drawString("Voltar", c2.x + (c2.width - fonte.stringWidth("LAN")) / 2, c2.y + (c2.height - fonte.getHeight()) / 2 + fonte.getAscent());
         } else {
             if (dopcoes) {
                 if (d1.contains(pr.lis.mx, pr.lis.my)) {

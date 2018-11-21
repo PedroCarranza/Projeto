@@ -10,17 +10,29 @@ import javax.imageio.ImageIO;
 public class Tela {
 
     Projeto pr;
+
     Menu men;
+
+    TelaInicial inicio;
+
     player p1;
 
     BufferedImage background;
+
     int bgdx = 0;
-    boolean down = false;
+
+    boolean down = false, comeco = true;
 
     public Tela(Projeto p) {
+
         pr = p;
+
         men = new Menu(pr);
-        p1 = new player(p);
+
+        p1 = new player(pr);
+
+        inicio = new TelaInicial(pr);
+
         try {
             background = ImageIO.read(new File("back.png"));
         } catch (IOException e) {
@@ -35,11 +47,18 @@ public class Tela {
         g.dispose();
     }
 
+    public void noComeco() {
+        Graphics2D g = pr.image.createGraphics();
+        inicio.drawTela(g);
+        g.dispose();
+    }
+
     public void update() {
         Graphics2D g = pr.image.createGraphics();
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
+
         try {
             g.drawImage(background.getSubimage(bgdx, 0, pr.getWidth(), 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         } catch (Exception e) {
