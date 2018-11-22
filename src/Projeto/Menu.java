@@ -52,7 +52,6 @@ public class Menu {
                 break;
             case 1:
                 btns.add(new Botao("Resumir", pr));
-                btns.add(new Botao("LAN", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Menu", pr));
                 btns.add(new Botao("Sair", pr));
@@ -70,12 +69,10 @@ public class Menu {
                 btns.add(new Botao("Voltar", pr));
                 break;
             case 4:
-                //TODO criar LAN
+                //TODO criar Entrar
+                btns.add(new Botao("Voltar", pr));
                 break;
             case 5:
-                // TODO entrar LAN
-                break;
-            case 6:
                 btns.add(new Botao("720 x 480", pr));
                 btns.add(new Botao("800 x 600", pr));
                 btns.add(new Botao("1280 x 720", pr));
