@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 
 public class Listeners implements MouseListener, KeyListener, MouseMotionListener {
 
-    boolean up = false, down = false, left = false, right = false, stop = false;
+    boolean up = false, down = false, left = false, right = false, stop = false,tiro = false;
     
     boolean acaofeita;
     
@@ -122,6 +122,9 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            tiro = true;
+        }
     }
 
     @Override
@@ -137,6 +140,9 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            tiro = false;
         }
     }
 

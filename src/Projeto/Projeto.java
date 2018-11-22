@@ -10,6 +10,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Projeto extends JFrame implements Runnable {
@@ -43,8 +45,8 @@ public class Projeto extends JFrame implements Runnable {
             @Override
             public void componentResized(ComponentEvent e) {
                 image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-                tela.p1.p1Pos[0] = 10;
-                tela.p1.p1Pos[1] = getHeight() / 2;
+                tela.p1.px = 10;
+                tela.p1.py = getHeight() / 2;
             }
 
         });
@@ -102,6 +104,11 @@ public class Projeto extends JFrame implements Runnable {
                 getContentPane().setCursor(blankCursor);
             } else {
                 tela.updatePaused();
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Projeto.class.getName()).log(Level.SEVERE, null, ex);
+                } 
                 getContentPane().setCursor(oldCursor);
             }
             last = Instant.now();

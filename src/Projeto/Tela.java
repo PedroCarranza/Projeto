@@ -5,6 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Tela {
@@ -20,8 +23,14 @@ public class Tela {
     int bgdx = 0;
 
     boolean down = false;
-    
+
     int estadoTela = 0;
+
+    ArrayList<Tiro> tiros;
+    
+    ArrayList<Inimigo> inimigos;
+    
+    Instant last = Instant.now();
 
     public Tela(Projeto p) {
 
@@ -30,6 +39,12 @@ public class Tela {
         men = new Menu(pr);
 
         p1 = new player(pr);
+
+        tiros = new ArrayList<>();
+        
+        inimigos = new ArrayList<>();
+        
+        inimigos.add(new Inimigo(p));
 
         try {
             background = ImageIO.read(new File("back.png"));
@@ -41,28 +56,6 @@ public class Tela {
 
     public void updatePaused() {
         Graphics2D g = pr.image.createGraphics();
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
-        if(men.btns.isEmpty()){
-            men.btns.add(new Botao("resumir", pr));
-            men.btns.add(new Botao("Opções", pr));
-            men.btns.add(new Botao("Menu", pr));
-            men.btns.add(new Botao("Sair", pr));
-        }
-        men.drawMenu(g);
-        g.dispose();
-    }
-
-    public void noComeco() {
-        Graphics2D g = pr.image.createGraphics();
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
-        if(men.btns.isEmpty()){
-            men.btns.add(new Botao("Um Jogador", pr));
-            men.btns.add(new Botao("LAN", pr));
-            men.btns.add(new Botao("Opções", pr));
-            men.btns.add(new Botao("Sair", pr));
-        }
         men.drawMenu(g);
         g.dispose();
     }
@@ -74,14 +67,27 @@ public class Tela {
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
         try {
-            g.drawImage(background.getSubimage(bgdx, 0, pr.getWidth(), 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
+            g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         } catch (Exception e) {
             bgdx = 0;
-            g.drawImage(background.getSubimage(bgdx, 0, pr.getWidth(), 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
+            g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         }
-        bgdx += 5;
+        bgdx += 8;
         //g.setColor(Color.red);
         //g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
+
+        if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 500) {
+            last = Instant.now();
+            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 36, pr));
+        }
+
+        for (int i = 0; i < tiros.size(); i++) {
+            tiros.get(i).drawNUpdate(g);
+        }
+        
+        for (int i = 0; i < inimigos.size(); i++) {
+            inimigos.get(i).update(g);
+        }
 
         p1.updatePlayer(g);
 

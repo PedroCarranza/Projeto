@@ -54,8 +54,6 @@ public class Menu {
                 btns.add(new Botao("1920 x 1080", pr));
                 btns.add(new Botao("Voltar", pr));
                 break;
-                
-
         }
         for (int i = 0; i < btns.size(); i++) {
             btns.get(i).drawBtn(g, i);
