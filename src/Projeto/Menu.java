@@ -14,6 +14,10 @@ public class Menu {
 
     BufferedImage pausebackground;
 
+    BufferedImage menubackground;
+
+    BufferedImage comandos;
+
     ArrayList<Botao> btns = new ArrayList<>();
 
     public Menu(Projeto pj) {
@@ -21,6 +25,8 @@ public class Menu {
 
         try {
             pausebackground = ImageIO.read(new File("pauseback.png"));
+            menubackground = ImageIO.read(new File("menuback.png"));
+            comandos = ImageIO.read(new File("comandos.png"));
         } catch (IOException e) {
             System.err.println("Imagem back não encontrada");
         }
@@ -30,9 +36,15 @@ public class Menu {
         btns.clear();
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
-        g.drawImage(pausebackground, 0, 0, pr.getWidth(), pr.getHeight(), pr);
+        if (pr.tela.estadoTela == 0) {
+            g.drawImage(menubackground, 0, 0, pr.getWidth(), pr.getHeight(), pr);
+        } else {
+            g.drawImage(pausebackground, 0, 0, pr.getWidth(), pr.getHeight(), pr);
+        }
         switch (pr.tela.estadoTela) {
             case 0:
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
                 btns.add(new Botao("Um Jogador", pr));
                 btns.add(new Botao("LAN", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
@@ -50,7 +62,7 @@ public class Menu {
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Ok", pr));
-                //TODO: add ibagem
+                g.drawImage(comandos, pr.getWidth() / 2 - pr.getWidth() / 6, pr.getHeight() / 8, pr.getWidth() / 3, pr.getWidth() / 5, pr);
                 break;
             case 3:
                 btns.add(new Botao("Criar", pr));
