@@ -2,7 +2,6 @@ package Projeto;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,9 +37,6 @@ public class Menu {
                 btns.add(new Botao("LAN", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
-                for (int i = 0; i < btns.size(); i++) {
-                    btns.get(i).drawBtn(g, i);
-                }
                 break;
             case 1:
                 btns.add(new Botao("Resumir", pr));
@@ -48,27 +44,18 @@ public class Menu {
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Menu", pr));
                 btns.add(new Botao("Sair", pr));
-                for (int i = 0; i < btns.size(); i++) {
-                    btns.get(i).drawBtn(g, i);
-                }
                 break;
             case 2:
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Ok", pr));
-                for (int i = 3; i < btns.size(); i++) {
-                    btns.get(i).drawBtn(g, i);
-                }
                 //TODO: add ibagem
                 break;
             case 3:
                 btns.add(new Botao("Criar", pr));
                 btns.add(new Botao("Entrar", pr));
                 btns.add(new Botao("Voltar", pr));
-                for (int i = 0; i < btns.size(); i++) {
-                    btns.get(i).drawBtn(g, i);
-                }
                 break;
             case 4:
                 //TODO criar LAN
@@ -82,10 +69,10 @@ public class Menu {
                 btns.add(new Botao("1280 x 720", pr));
                 btns.add(new Botao("1920 x 1080", pr));
                 btns.add(new Botao("Voltar", pr));
-                for (int i = 0; i < btns.size(); i++) {
-                    btns.get(i).drawBtn(g, i);
-                }
                 break;
+        }
+        for (int i = 0; i < btns.size(); i++) {
+            btns.get(i).drawBtn(g, i);
         }
     }
 }

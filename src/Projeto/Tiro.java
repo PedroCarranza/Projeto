@@ -17,9 +17,10 @@ public class Tiro {
     }
 
     public void drawNUpdate(Graphics2D g) {
+        int s = pr.getHeight()/720;
         x += 30;
         ret.setLocation(x, y);
-        g.drawImage(pr.tela.p1.sprites.getSubimage(217, 7, 9, 3), x, y, 15, 5, null);
+        g.drawImage(pr.tela.p1.sprites.getSubimage(217, 7, 9, 3), x, y, s*15, s*5, null);
         if(x > pr.getWidth()){
             pr.tela.tiros.remove(this);
         }

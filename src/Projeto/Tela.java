@@ -78,7 +78,7 @@ public class Tela {
 
         if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
             last = Instant.now();
-            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 36, pr));
+            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19*pr.getHeight()/360, pr));
         }
 
         for (int i = 0; i < tiros.size(); i++) {
