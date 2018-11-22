@@ -6,9 +6,11 @@
 package Projeto;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import javax.imageio.ImageIO;
 
 /**
@@ -23,8 +25,8 @@ public class Inimigo {
     int scaler = 2;
     public Inimigo(Projeto p){
         pr = p;
-        px = pr.getWidth()-60;
-        py = pr.getHeight()-50;
+        px = pr.getWidth()-200;
+        py = pr.getHeight()-150;
         try {
             sprites = ImageIO.read(new File("nmigo.png"));
         } catch (IOException e) {
@@ -32,43 +34,23 @@ public class Inimigo {
         }
     }
     
+    public boolean collided(Tiro t){
+        return new Rectangle(px, py, 117, 89).intersects(t.ret);
+    }
+    
     public void update(Graphics2D g){
         scaler = pr.getHeight()/360;
         moveSpeed = 3*scaler;
         frame++;
-        if (frame > 9) {
+        if (frame > 14) {
             frame = 0;
         }
-        if (pr.lis.right && px + 43 * scaler + moveSpeed < pr.getWidth()) {
-            px += moveSpeed;
+        
+        if (py + 20*Math.sin(Instant.now().toEpochMilli()/1000) > 0 && py + 20*Math.sin(Instant.now().toEpochMilli()/1000)<pr.getHeight()-50) {
+            py += 5*Math.sin(Instant.now().toEpochMilli()/1000);
         }
-        if (pr.lis.left && px - moveSpeed > 0) {
-            px -= moveSpeed;
-        }
-        if (pr.lis.down && py + 39 * scaler+ moveSpeed < pr.getHeight()) {
-            py += moveSpeed;
-        }
-        if (pr.lis.up && py - moveSpeed > 0) {
-            py -= moveSpeed;
-        }
-        if (pr.lis.up && !pr.lis.down) {
-            if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 5, 43, 35), px, py, 43 * scaler, 35 * scaler, null);
-            } else {
-                g.drawImage(sprites.getSubimage(321, 5, 36, 35), px + 12, py, 36 * scaler, 35 * scaler, null);
-            }
-        } else if (!pr.lis.up && pr.lis.down) {
-            if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 89, 43, 39), px, py, 43 * scaler, 39 * scaler, null);
-            } else {
-                g.drawImage(sprites.getSubimage(321, 89, 36, 39), px + 12, py, 36 * scaler, 39 * scaler, null);
-            }
-        } else {
-            if (!pr.lis.left) {
-                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 42, 43, 39), px, py, 43 * scaler, 39 * scaler, null);
-            } else {
-                g.drawImage(sprites.getSubimage(321, 42, 36, 39), px + 12, py, 36 * scaler, 39 * scaler, null);
-            }
-        }
+        
+        g.drawImage(sprites.getSubimage(862 + 120 * (frame / 5), 21, 117, 89), px, py, 43 * scaler, 39 * scaler, null);
+            
     }
 }

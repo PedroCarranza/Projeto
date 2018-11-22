@@ -87,9 +87,16 @@ public class Tela {
         
         for (int i = 0; i < inimigos.size(); i++) {
             inimigos.get(i).update(g);
+            for (int j = 0; j < tiros.size(); j++) {
+                if(inimigos.get(i).collided(tiros.get(j))){
+                    inimigos.remove(i);
+                    break;
+                }
+            }
         }
 
         p1.updatePlayer(g);
+        
 
         g.dispose();
     }
