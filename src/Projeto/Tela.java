@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 public class Tela {
 
@@ -31,6 +32,8 @@ public class Tela {
     ArrayList<Inimigo> inimigos;
     
     Instant last = Instant.now();
+    
+    Timer t;
 
     public Tela(Projeto p) {
 
@@ -44,7 +47,9 @@ public class Tela {
         
         inimigos = new ArrayList<>();
         
-        inimigos.add(new Inimigo(p));
+        t = new Timer(10000, e -> {
+            inimigos.add(new Inimigo(p));
+        });
 
         try {
             background = ImageIO.read(new File("back.png"));
@@ -57,15 +62,18 @@ public class Tela {
     public void updatePaused() {
         Graphics2D g = pr.image.createGraphics();
         men.drawMenu(g);
+        t.stop();
         g.dispose();
     }
 
     public void update() {
         Graphics2D g = pr.image.createGraphics();
-
+        
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
+        t.start();
+        
         try {
             g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         } catch (Exception e) {
@@ -73,8 +81,6 @@ public class Tela {
             g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         }
         bgdx += 8;
-        //g.setColor(Color.red);
-        //g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
 
         if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
             last = Instant.now();
@@ -89,7 +95,8 @@ public class Tela {
             inimigos.get(i).update(g);
             for (int j = 0; j < tiros.size(); j++) {
                 if(inimigos.get(i).collided(tiros.get(j))){
-                    inimigos.remove(i);
+                    inimigos.get(i).dano(1);
+                    tiros.remove(j);
                     break;
                 }
             }

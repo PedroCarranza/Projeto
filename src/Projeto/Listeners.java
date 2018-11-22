@@ -9,12 +9,11 @@ import java.awt.event.MouseMotionListener;
 
 public class Listeners implements MouseListener, KeyListener, MouseMotionListener {
 
-    boolean up = false, down = false, left = false, right = false, stop = false,tiro = false;
-    
+    boolean up = false, down = false, left = false, right = false, stop = false, tiro = false;
+
     boolean acaofeita;
-    
+
     int estadoAnt;
-    
 
     int moveSpeed = 5, mx = 0, my = 0;
 
@@ -33,58 +32,61 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     public void mousePressed(MouseEvent e) {
 
         Point ponto = e.getPoint();
-        
+
         for (int i = 0; i < pr.tela.men.btns.size(); i++) {
-            if(pr.tela.men.btns.get(i).getRet(i).contains(ponto)){
-                if(pr.tela.men.btns.get(i).getName().equals("Sair")){
+            if (pr.tela.men.btns.get(i).getRet(i).contains(ponto)) {
+                if (pr.tela.men.btns.get(i).getName().equals("Sair")) {
                     System.exit(0);
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Um Jogador")){
+                if (pr.tela.men.btns.get(i).getName().equals("Um Jogador")) {
                     pr.tela.estadoTela = 2;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Ok")){
+                if (pr.tela.men.btns.get(i).getName().equals("Ok")) {
                     pr.tela.estadoTela = 10;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Voltar")){
+                if (pr.tela.men.btns.get(i).getName().equals("Voltar")) {
                     pr.tela.estadoTela = estadoAnt;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Menu")){
+                if (pr.tela.men.btns.get(i).getName().equals("Menu")) {
                     pr.tela.estadoTela = 0;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Resumir")){
+                if (pr.tela.men.btns.get(i).getName().equals("Resumir")) {
                     pr.tela.estadoTela = 10;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("LAN")){
+                if (pr.tela.men.btns.get(i).getName().equals("LAN")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 3;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Criar")){
-                    pr.tela.estadoTela = 4;
+                if (pr.tela.men.btns.get(i).getName().equals("Criar")) {
+                    pr.tela.estadoTela = 10;
+                    Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
+                    discoveryThread.start();
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Entrar")){
+                if (pr.tela.men.btns.get(i).getName().equals("Entrar")) {
                     pr.tela.estadoTela = 5;
+                    Connect c = new Connect(10);
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("Alterar Resolução")){
+                if (pr.tela.men.btns.get(i).getName().equals("Alterar Resolução")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 6;
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("720 x 480")){
+                if (pr.tela.men.btns.get(i).getName().equals("720 x 480")) {
                     pr.setSize(720, 480);
                     pr.setLocationRelativeTo(null);
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("800 x 600")){
+                if (pr.tela.men.btns.get(i).getName().equals("800 x 600")) {
                     pr.setSize(800, 600);
                     pr.setLocationRelativeTo(null);
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("1280 x 720")){
+                if (pr.tela.men.btns.get(i).getName().equals("1280 x 720")) {
                     pr.setSize(1280, 720);
                     pr.setLocationRelativeTo(null);
                 }
-                if(pr.tela.men.btns.get(i).getName().equals("1920 x 1080")){
+                if (pr.tela.men.btns.get(i).getName().equals("1920 x 1080")) {
                     pr.setSize(1920, 1080);
                     pr.setLocationRelativeTo(null);
                 }
-                
+
             }
         }
     }
@@ -108,7 +110,11 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            pr.tela.estadoTela = 1;
+            if (pr.tela.estadoTela == 10) {
+                pr.tela.estadoTela = 1;
+            } else if (pr.tela.estadoTela == 1) {
+                pr.tela.estadoTela = 10;
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_W) {
             up = true;
@@ -122,7 +128,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             tiro = true;
         }
     }
@@ -141,7 +147,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             tiro = false;
         }
     }

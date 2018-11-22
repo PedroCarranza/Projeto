@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
  */
 public class Inimigo {
     int px,py;
+    int hp = 3;
     Projeto pr;
     BufferedImage sprites;
     int frame = 0, moveSpeed = 5;
@@ -36,6 +37,13 @@ public class Inimigo {
     
     public boolean collided(Tiro t){
         return new Rectangle(px, py, 117, 89).intersects(t.ret);
+    }
+    
+    public void dano(int d){
+        hp -=d;
+        if(hp<0){
+            pr.tela.inimigos.remove(this);
+        }
     }
     
     public void update(Graphics2D g){

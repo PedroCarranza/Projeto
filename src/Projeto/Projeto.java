@@ -108,7 +108,7 @@ public class Projeto extends JFrame implements Runnable {
                     Thread.sleep(30);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Projeto.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                }
                 getContentPane().setCursor(oldCursor);
             }
             last = Instant.now();
@@ -124,6 +124,7 @@ public class Projeto extends JFrame implements Runnable {
     public static void main(String[] args) {
         Projeto proj = new Projeto();
         proj.start();
+
     }
 
 }
