@@ -25,4 +25,8 @@ hs_err_pid*
 #nbproject folder
 /nbproject
 nbproject/private/private.xml
+<<<<<<< HEAD
 nbproject/private/private.xml
+=======
+*.properties
+>>>>>>> d3d237e3c6d4dbd2d83bd755161d8c849ac12050

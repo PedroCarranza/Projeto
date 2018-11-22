@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class player {
+public class Player {
     int px,py;
     Projeto pr;
     BufferedImage sprites;
     int frame = 0, moveSpeed = 5;
     int scaler = 2;
-    public player(Projeto p){
+    public Player(Projeto p){
         pr = p;
         px = 20;
         py = pr.getHeight()/2;
