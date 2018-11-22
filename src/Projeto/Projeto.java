@@ -105,7 +105,7 @@ public class Projeto extends JFrame implements Runnable {
             } else {
                 tela.updatePaused();
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(30);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Projeto.class.getName()).log(Level.SEVERE, null, ex);
                 } 

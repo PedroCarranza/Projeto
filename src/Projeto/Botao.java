@@ -6,9 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Botao {
+    
     private final String nome;
+    
     private final Projeto pr;
-    public Botao(String n,Projeto p){
+    
+    public Botao (String n, Projeto p){
         nome = n;
         pr = p;
     }

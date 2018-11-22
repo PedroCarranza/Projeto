@@ -16,7 +16,7 @@ public class Tela {
 
     Menu men;
 
-    player p1;
+    Player p1;
 
     BufferedImage background;
 
@@ -38,7 +38,7 @@ public class Tela {
 
         men = new Menu(pr);
 
-        p1 = new player(pr);
+        p1 = new Player(pr);
 
         tiros = new ArrayList<>();
         
@@ -76,7 +76,7 @@ public class Tela {
         //g.setColor(Color.red);
         //g.drawOval(pr.lis.mx - 50, pr.lis.my - 50, 100, 100);
 
-        if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 500) {
+        if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
             last = Instant.now();
             pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 36, pr));
         }
