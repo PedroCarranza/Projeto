@@ -10,6 +10,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Projeto extends JFrame implements Runnable {
@@ -43,6 +45,8 @@ public class Projeto extends JFrame implements Runnable {
             @Override
             public void componentResized(ComponentEvent e) {
                 image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                tela.p1.px = 10;
+                tela.p1.py = getHeight() / 2;
             }
 
         });
@@ -95,18 +99,17 @@ public class Projeto extends JFrame implements Runnable {
         requestFocus();
         while (running) {
             now = Instant.now();
-            if (tela.comeco) {
-                tela.noComeco();
-                getContentPane().setCursor(oldCursor);
+            if (tela.estadoTela == 10) {
+                delta += Duration.between(last, now).getNano() / ns;
+                getContentPane().setCursor(blankCursor);
             } else {
-
-                if (!lis.stop) {
-                    delta += Duration.between(last, now).getNano() / ns;
-                    getContentPane().setCursor(blankCursor);
-                } else {
-                    tela.updatePaused();
-                    getContentPane().setCursor(oldCursor);
-                }
+                tela.updatePaused();
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Projeto.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+                getContentPane().setCursor(oldCursor);
             }
             last = Instant.now();
             while (delta > 0 && !lis.stop) {//garante que roda 60 vezes por segundo
