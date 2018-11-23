@@ -1,10 +1,9 @@
 package Projeto;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.InputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -33,8 +32,9 @@ public class Connect extends Thread implements Runnable {
     @Override
     public void run() {
         running = true;
-        BufferedReader br = null;
-        BufferedWriter bf = null;
+        DataInputStream dIn = null;
+        DataOutputStream dOut = null;
+        InputStream in;
         if (opt == 0) {
             Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
             discoveryThread.start();
@@ -44,8 +44,8 @@ public class Connect extends Thread implements Runnable {
                 Socket tmp = serv.accept();
                 System.out.println("Cliente conectado");
                 connec = true;
-                br = new BufferedReader(new InputStreamReader(tmp.getInputStream()));
-                bf = new BufferedWriter(new OutputStreamWriter(tmp.getOutputStream()));
+                dIn = new DataInputStream(tmp.getInputStream());
+                dOut = new DataOutputStream(tmp.getOutputStream());
             } catch (IOException e) {
                 System.err.println("Não foi possível abrir o servidor");
             }
@@ -57,8 +57,8 @@ public class Connect extends Thread implements Runnable {
                 if (cli.isConnected()) {
                     System.out.println("Conectado");
                     connec = true;
-                    br = new BufferedReader(new InputStreamReader(cli.getInputStream()));
-                    bf = new BufferedWriter(new OutputStreamWriter(cli.getOutputStream()));
+                    dIn = new DataInputStream(cli.getInputStream());
+                    dOut = new DataOutputStream(cli.getOutputStream());
                     pr.tela.estadoTela = 10;
                 }
             } catch (IOException ex) {
@@ -66,17 +66,29 @@ public class Connect extends Thread implements Runnable {
                 ex.printStackTrace();
             }
         }
+        pr.tela.p2 = new Player2(pr);
         while (running) {
             
             try {
-                sleep(50);
-                bf.write(pr.tela.p1.px + " " + pr.tela.p1.py + "\n");
-                String in = br.readLine();
-                String dads[] = in.split(" ");
-                pr.tela.p2.px = Integer.parseInt(dads[0]);
-                pr.tela.p2.py = Integer.parseInt(dads[1]);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+                dOut.writeByte(1);
+                dOut.writeInt(pr.tela.p1.px);
+                dOut.writeInt(pr.tela.p1.py);
+                dOut.writeBoolean(pr.lis.up);
+                dOut.writeBoolean(pr.lis.down);
+                dOut.writeBoolean(pr.lis.left);
+                dOut.writeBoolean(pr.lis.right);
+                dOut.writeBoolean(pr.lis.tiro);
+                //String in = br.readLine();
+                if(dIn.readByte() == 1){
+                    pr.tela.p2.px = dIn.readInt();
+                    pr.tela.p2.py = dIn.readInt();
+                    pr.tela.p2.up = dIn.readBoolean();
+                    pr.tela.p2.down = dIn.readBoolean();
+                    pr.tela.p2.left = dIn.readBoolean();
+                    pr.tela.p2.right = dIn.readBoolean();
+                    pr.tela.p2.tiro = dIn.readBoolean();
+                }
+                
             } catch (IOException ex) {
                 Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
             }

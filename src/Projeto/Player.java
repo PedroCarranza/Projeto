@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Player {
+public class Player{
     int px,py;
     Projeto pr;
     BufferedImage sprites;
@@ -22,6 +22,11 @@ public class Player {
             System.err.println("Imagem não encontrada");
         }
     }
+    
+    public String getData(){
+        return px + " " + py + " " + pr.lis.up + pr.lis.down;
+        
+    } 
     
     public void updatePlayer(Graphics2D g){
         scaler = pr.getHeight()/360;

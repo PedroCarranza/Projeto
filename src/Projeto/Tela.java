@@ -19,7 +19,8 @@ public class Tela {
 
     Menu men;
 
-    Player p1,p2;
+    Player p1;
+    Player2 p2;
 
     BufferedImage background;
 
@@ -77,10 +78,6 @@ public class Tela {
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
         t.start();
-        
-        if(p2 == null && pr.lis.c.connec){
-            p2 = new Player(pr);
-        }
 
         try {
             g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
@@ -93,6 +90,16 @@ public class Tela {
         if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
             last = Instant.now();
             pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19 * pr.getHeight() / 360, pr));
+        }
+        
+        if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
+            last = Instant.now();
+            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19 * pr.getHeight() / 360, pr));
+        }
+        
+        if (p2 != null && p2.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
+            last = Instant.now();
+            pr.tela.tiros.add(new Tiro(p2.px + 32, p2.py + 19 * pr.getHeight() / 360, pr));
         }
 
         for (int i = 0; i < tiros.size(); i++) {
