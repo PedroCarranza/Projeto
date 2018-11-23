@@ -71,7 +71,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                         c.close();
                         c.running = false;
                     }
-                    c = new Connect(0,pr);
+                    c = new Connect(0, pr);
                     c.start();
                     break;
                 }
@@ -81,7 +81,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                         c.close();
                         c.running = false;
                     }
-                    c = new Connect(1,pr);
+                    c = new Connect(1, pr);
                     c.start();
                     break;
                 }
@@ -113,6 +113,11 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 if (pr.tela.men.btns.get(i).getName().equals("Ranking")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 6;
+                    break;
+                }
+                if (pr.tela.men.btns.get(i).getName().equals("Adicionar")) {
+                    pr.tela.estadoTela = 0;
+                    pr.tela.men.ov.Atualiza();
                     break;
                 }
 
