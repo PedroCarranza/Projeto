@@ -1,6 +1,8 @@
 package Projeto;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -81,7 +83,13 @@ public class Menu {
                 btns.add(new Botao("Voltar", pr));
                 break;
             case 4:
-                //TODO criar Entrar
+                g.setColor(Color.yellow);
+                g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 24));
+                g.drawString("Conectando...", pr.getWidth() / 3 - pr.getWidth() / 8, pr.getHeight() / 8);
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
                 btns.add(new Botao("Voltar", pr));
                 break;
             case 5:

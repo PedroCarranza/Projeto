@@ -67,18 +67,22 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Criar")) {
                     pr.tela.estadoTela = 10;
-                    if (c == null) {
-                        c = new Connect(0);
-                        c.start();
+                    if (c != null) {
+                        c.close();
+                        c.running = false;
                     }
+                    c = new Connect(0,pr);
+                    c.start();
                     break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Entrar")) {
                     pr.tela.estadoTela = 4;
-                    if (c == null) {
-                        c = new Connect(1);
-                        c.start();
+                    if (c != null) {
+                        c.close();
+                        c.running = false;
                     }
+                    c = new Connect(1,pr);
+                    c.start();
                     break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Alterar Resolução")) {
