@@ -71,7 +71,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                         c.close();
                         c.running = false;
                     }
-                    c = new Connect(0);
+                    c = new Connect(0,pr);
                     c.start();
                     break;
                 }
@@ -81,7 +81,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                         c.close();
                         c.running = false;
                     }
-                    c = new Connect(1);
+                    c = new Connect(1,pr);
                     c.start();
                     break;
                 }

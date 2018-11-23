@@ -22,17 +22,19 @@ public class Connect extends Thread implements Runnable {
     Socket cli;
     String servIP;
     ServerSocket serv;
+    Projeto pr;
     boolean running, connec = false;
 
-    public Connect(int o) {
+    public Connect(int o,Projeto p) {
         opt = o;
+        pr = p;
     }
 
     @Override
     public void run() {
         running = true;
-        BufferedReader br;
-        BufferedWriter bf;
+        BufferedReader br = null;
+        BufferedWriter bf = null;
         if (opt == 0) {
             Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
             discoveryThread.start();
@@ -57,6 +59,7 @@ public class Connect extends Thread implements Runnable {
                     connec = true;
                     br = new BufferedReader(new InputStreamReader(cli.getInputStream()));
                     bf = new BufferedWriter(new OutputStreamWriter(cli.getOutputStream()));
+                    pr.tela.estadoTela = 10;
                 }
             } catch (IOException ex) {
                 System.err.println("Não foi possível conectar ao servidor");
@@ -64,9 +67,17 @@ public class Connect extends Thread implements Runnable {
             }
         }
         while (running) {
+            
             try {
                 sleep(50);
+                bf.write(pr.tela.p1.px + " " + pr.tela.p1.py + "\n");
+                String in = br.readLine();
+                String dads[] = in.split(" ");
+                pr.tela.p2.px = Integer.parseInt(dads[0]);
+                pr.tela.p2.py = Integer.parseInt(dads[1]);
             } catch (InterruptedException ex) {
+                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
