@@ -35,8 +35,8 @@ public class Botao {
                 g.setPaint(new GradientPaint(ret.x, ret.y, Color.BLACK, ret.x + ret.width, ret.y + ret.height, Color.LIGHT_GRAY));
             }
             g.fill(ret);
-            g.setColor(Color.BLACK);
-            g.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 16));
+            g.setColor(Color.YELLOW);
+            g.setFont(new Font(Font.MONOSPACED, Font.ITALIC+Font.BOLD, 16));
             FontMetrics fonte = g.getFontMetrics(g.getFont());
             g.drawString(nome, ret.x + (ret.width - fonte.stringWidth(nome)) / 2, ret.y + (ret.height - fonte.getHeight()) / 2 + fonte.getAscent());
         }
