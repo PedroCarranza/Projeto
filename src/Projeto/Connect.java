@@ -9,6 +9,8 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Connect extends Thread implements Runnable {
 
@@ -18,14 +20,43 @@ public class Connect extends Thread implements Runnable {
     ServerSocket serv;
 
     public Connect(int o) {
-        /*opt = o;
+        opt = o;
         if (o == 0) {
+            Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
+            discoveryThread.start();
             try {
                 serv = new ServerSocket(25566);
             } catch (IOException e) {
                 System.err.println("Não foi possível abrir o servidor");
             }
-        }*/
+        }
+        if (o == 1) {
+            receiveIP();
+            try {
+                cli = new Socket(servIP, 25566);
+                if (cli.isConnected()) {
+                    System.out.println("Conectado");
+                }
+            } catch (IOException ex) {
+                System.err.println("Não foi possível conectar ao servidor");
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void run() {
+
+        while (true) {
+            try {
+                sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void receiveIP() {
         // Find the server using UDP broadcast
         try {
             //Open a random port to send the package
@@ -45,7 +76,7 @@ public class Connect extends Thread implements Runnable {
             // Broadcast the message over all the network interfaces
             Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
-                NetworkInterface networkInterface = (NetworkInterface)interfaces.nextElement();
+                NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
 
                 if (networkInterface.isLoopback() || !networkInterface.isUp()) {
                     continue; // Don't want to broadcast to the loopback interface
@@ -89,14 +120,6 @@ public class Connect extends Thread implements Runnable {
             c.close();
         } catch (IOException ex) {
             System.err.println("ADajksdohji");
-        }
-    }
-
-    @Override
-    public void run() {
-
-        while (true) {
-
         }
     }
 }

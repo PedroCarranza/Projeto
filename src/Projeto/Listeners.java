@@ -15,6 +15,8 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
 
     int estadoAnt;
 
+    Connect c;
+
     int moveSpeed = 5, mx = 0, my = 0;
 
     Projeto pr;
@@ -40,51 +42,69 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Um Jogador")) {
                     pr.tela.estadoTela = 2;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Ok")) {
                     pr.tela.estadoTela = 10;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Voltar")) {
                     pr.tela.estadoTela = estadoAnt;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Menu")) {
                     pr.tela.estadoTela = 0;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Resumir")) {
                     pr.tela.estadoTela = 10;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("LAN")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 3;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Criar")) {
                     pr.tela.estadoTela = 10;
-                    Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
-                    discoveryThread.start();
+                    if (c == null) {
+                        c = new Connect(0);
+                        c.start();
+                    }
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Entrar")) {
                     pr.tela.estadoTela = 4;
-                    Connect c = new Connect(10);
+                    if (c == null) {
+                        c = new Connect(1);
+                        c.start();
+                    }
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Alterar Resolução")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 5;
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("720 x 480")) {
                     pr.setSize(720, 480);
                     pr.setLocationRelativeTo(null);
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("800 x 600")) {
                     pr.setSize(800, 600);
                     pr.setLocationRelativeTo(null);
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("1280 x 720")) {
                     pr.setSize(1280, 720);
                     pr.setLocationRelativeTo(null);
+                    break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("1920 x 1080")) {
                     pr.setSize(1920, 1080);
                     pr.setLocationRelativeTo(null);
+                    break;
                 }
 
             }
