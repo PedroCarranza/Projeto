@@ -106,6 +106,11 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     pr.setLocationRelativeTo(null);
                     break;
                 }
+                if (pr.tela.men.btns.get(i).getName().equals("Ranking")) {
+                    estadoAnt = pr.tela.estadoTela;
+                    pr.tela.estadoTela = 6;
+                    break;
+                }
 
             }
         }

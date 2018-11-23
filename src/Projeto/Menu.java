@@ -1,8 +1,6 @@
 package Projeto;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,18 +20,25 @@ public class Menu {
 
     BufferedImage nome;
 
+    BufferedImage over;
+
     ArrayList<Botao> btns = new ArrayList<>();
+
+    Ranking rank;
 
     public Menu(Projeto pj) {
         pr = pj;
+
+        rank = new Ranking(pr);
 
         try {
             pausebackground = ImageIO.read(new File("pauseback.png"));
             menubackground = ImageIO.read(new File("menuback.png"));
             comandos = ImageIO.read(new File("comandos.png"));
             nome = ImageIO.read(new File("logo.png"));
+            over = ImageIO.read(new File("over.png"));
         } catch (IOException e) {
-            System.err.println("Imagem back não encontrada");
+            System.err.println("Imagem não encontrada");
         }
     }
 
@@ -52,6 +57,7 @@ public class Menu {
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Um Jogador", pr));
                 btns.add(new Botao("LAN", pr));
+                btns.add(new Botao("Ranking", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
                 g.drawImage(nome, pr.getWidth() / -pr.getWidth() / 4, pr.getHeight() / 16, pr.getWidth(), pr.getWidth() / 6, pr);
@@ -84,6 +90,14 @@ public class Menu {
                 btns.add(new Botao("1280 x 720", pr));
                 btns.add(new Botao("1920 x 1080", pr));
                 btns.add(new Botao("Voltar", pr));
+                break;
+            case 6:
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("Voltar", pr));
+                rank.DrawRank(g);
                 break;
         }
 
