@@ -96,6 +96,7 @@ public class Menu {
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
                 btns.add(new Botao("Voltar", pr));
                 rank.DrawRank(g);
                 break;
