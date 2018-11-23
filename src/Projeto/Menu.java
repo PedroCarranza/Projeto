@@ -1,6 +1,7 @@
 package Projeto;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JTextField;
 
 public class Menu {
 
@@ -28,10 +30,18 @@ public class Menu {
 
     Ranking rank;
 
+    JTextField salvarnome = new JTextField();
+
+    Over ov;
+
     public Menu(Projeto pj) {
         pr = pj;
 
         rank = new Ranking(pr);
+
+        ov = new Over(pr);
+
+        salvarnome.setPreferredSize(new Dimension(50, 20));
 
         try {
             pausebackground = ImageIO.read(new File("pauseback.png"));
@@ -107,6 +117,11 @@ public class Menu {
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Voltar", pr));
                 rank.DrawRank(g);
+                break;
+            case 7:
+                pr.add(salvarnome);
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("Adicionar", pr));
                 break;
         }
 

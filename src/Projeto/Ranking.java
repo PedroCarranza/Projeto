@@ -63,7 +63,12 @@ public class Ranking {
                     textoaux = '0' + textoaux;
                 }
                 texto = texto + textoaux;
-                g.drawString(texto, pr.getWidth() / 2 - 42*6, pr.getHeight() / 16 + fonte.getAscent() + (i + 1) * pr.getHeight() / 16);
+                g.drawString(texto, pr.getWidth() / 2 - 42 * 6, pr.getHeight() / 16 + fonte.getAscent() + (i + 1) * pr.getHeight() / 16);
+            }
+            try {
+                rank.close();
+            } catch (IOException ex) {
+                System.err.println("Não consegui fechar o ranking, me ajuda");
             }
         } else {
             g.drawString("Não tem ranking salvo, jogue agora para criar o seu!",
