@@ -19,7 +19,7 @@ public class Tela {
 
     Menu men;
 
-    Player p1;
+    Player p1,p2;
 
     BufferedImage background;
 
@@ -77,6 +77,10 @@ public class Tela {
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
         t.start();
+        
+        if(p2 == null && pr.lis.c.connec){
+            p2 = new Player(pr);
+        }
 
         try {
             g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
@@ -117,6 +121,9 @@ public class Tela {
         g.drawString("Pontuação: " + texto, pr.getWidth() - (16 * (texto.length() + 10)), fonte.getAscent());
 
         p1.updatePlayer(g);
+        if(p2!=null){
+            p2.updatePlayer(g);
+        }
 
         g.dispose();
     }

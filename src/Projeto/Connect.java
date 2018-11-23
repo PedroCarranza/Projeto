@@ -1,6 +1,10 @@
 package Projeto;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -18,41 +22,62 @@ public class Connect extends Thread implements Runnable {
     Socket cli;
     String servIP;
     ServerSocket serv;
+    boolean running, connec = false;
 
     public Connect(int o) {
         opt = o;
-        if (o == 0) {
+    }
+
+    @Override
+    public void run() {
+        running = true;
+        BufferedReader br;
+        BufferedWriter bf;
+        if (opt == 0) {
             Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
             discoveryThread.start();
             try {
                 serv = new ServerSocket(25566);
+                System.out.println("Servidor aberto");
+                Socket tmp = serv.accept();
+                System.out.println("Cliente conectado");
+                connec = true;
+                br = new BufferedReader(new InputStreamReader(tmp.getInputStream()));
+                bf = new BufferedWriter(new OutputStreamWriter(tmp.getOutputStream()));
             } catch (IOException e) {
                 System.err.println("Não foi possível abrir o servidor");
             }
         }
-        if (o == 1) {
+        if (opt == 1) {
             receiveIP();
             try {
                 cli = new Socket(servIP, 25566);
                 if (cli.isConnected()) {
                     System.out.println("Conectado");
+                    connec = true;
+                    br = new BufferedReader(new InputStreamReader(cli.getInputStream()));
+                    bf = new BufferedWriter(new OutputStreamWriter(cli.getOutputStream()));
                 }
             } catch (IOException ex) {
                 System.err.println("Não foi possível conectar ao servidor");
                 ex.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void run() {
-
-        while (true) {
+        while (running) {
             try {
                 sleep(50);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    public void close() {
+        try {
+            serv.close();
+            cli.close();
+        } catch (Exception e) {
+
         }
     }
 
@@ -69,7 +94,7 @@ public class Connect extends Thread implements Runnable {
             try {
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 8888);
                 c.send(sendPacket);
-                System.out.println(getClass().getName() + ">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
+                System.out.println(getClass().getName() + " > Request packet sent to: 255.255.255.255 (DEFAULT)");
             } catch (Exception e) {
             }
 
@@ -95,11 +120,11 @@ public class Connect extends Thread implements Runnable {
                     } catch (Exception e) {
                     }
 
-                    System.out.println(getClass().getName() + ">>> Request packet sent to: " + broadcast.getHostAddress() + "; Interface: " + networkInterface.getDisplayName());
+                    System.out.println(getClass().getName() + " > Request packet sent to: " + broadcast.getHostAddress() + "; Interface: " + networkInterface.getDisplayName());
                 }
             }
 
-            System.out.println(getClass().getName() + ">>> Done looping over all network interfaces. Now waiting for a reply!");
+            System.out.println(getClass().getName() + " > Done looping over all network interfaces. Now waiting for a reply!");
 
             //Wait for a response
             byte[] recvBuf = new byte[15000];
@@ -107,7 +132,7 @@ public class Connect extends Thread implements Runnable {
             c.receive(receivePacket);
 
             //We have a response
-            System.out.println(getClass().getName() + ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
+            System.out.println(getClass().getName() + " > Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
 
             //Check if the message is correct
             String message = new String(receivePacket.getData()).trim();
