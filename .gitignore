@@ -26,3 +26,5 @@ hs_err_pid*
 *.xml
 *.properties
 
+build/classes/.netbeans_update_resources
+build/classes/.netbeans_automatic_build
