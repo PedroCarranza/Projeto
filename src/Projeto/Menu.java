@@ -1,6 +1,8 @@
 package Projeto;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,6 +20,8 @@ public class Menu {
 
     BufferedImage comandos;
 
+    BufferedImage nome;
+
     ArrayList<Botao> btns = new ArrayList<>();
 
     public Menu(Projeto pj) {
@@ -27,6 +31,7 @@ public class Menu {
             pausebackground = ImageIO.read(new File("pauseback.png"));
             menubackground = ImageIO.read(new File("menuback.png"));
             comandos = ImageIO.read(new File("comandos.png"));
+            nome = ImageIO.read(new File("logo.png"));
         } catch (IOException e) {
             System.err.println("Imagem back não encontrada");
         }
@@ -49,6 +54,7 @@ public class Menu {
                 btns.add(new Botao("LAN", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
+                g.drawImage(nome, pr.getWidth() / -pr.getWidth() / 4, pr.getHeight() / 16, pr.getWidth(), pr.getWidth() / 6, pr);
                 break;
             case 1:
                 btns.add(new Botao("Resumir", pr));
@@ -80,6 +86,7 @@ public class Menu {
                 btns.add(new Botao("Voltar", pr));
                 break;
         }
+
         for (int i = 0; i < btns.size(); i++) {
             btns.get(i).drawBtn(g, i);
         }

@@ -1,6 +1,8 @@
 package Projeto;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,12 +30,14 @@ public class Tela {
     int estadoTela = 0;
 
     ArrayList<Tiro> tiros;
-    
+
     ArrayList<Inimigo> inimigos;
-    
+
     Instant last = Instant.now();
-    
+
     Timer t;
+
+    int pontuacao = 0;
 
     public Tela(Projeto p) {
 
@@ -44,9 +48,9 @@ public class Tela {
         p1 = new Player(pr);
 
         tiros = new ArrayList<>();
-        
+
         inimigos = new ArrayList<>();
-        
+
         t = new Timer(10000, e -> {
             inimigos.add(new Inimigo(p));
         });
@@ -68,12 +72,12 @@ public class Tela {
 
     public void update() {
         Graphics2D g = pr.image.createGraphics();
-        
+
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
         t.start();
-        
+
         try {
             g.drawImage(background.getSubimage(bgdx, 0, 1920, 1080), 0, 0, pr.getWidth(), pr.getHeight(), null);
         } catch (Exception e) {
@@ -84,17 +88,17 @@ public class Tela {
 
         if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
             last = Instant.now();
-            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19*pr.getHeight()/360, pr));
+            pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19 * pr.getHeight() / 360, pr));
         }
 
         for (int i = 0; i < tiros.size(); i++) {
             tiros.get(i).drawNUpdate(g);
         }
-        
+
         for (int i = 0; i < inimigos.size(); i++) {
             inimigos.get(i).update(g);
             for (int j = 0; j < tiros.size(); j++) {
-                if(inimigos.get(i).collided(tiros.get(j))){
+                if (inimigos.get(i).collided(tiros.get(j))) {
                     inimigos.get(i).dano(1);
                     tiros.remove(j);
                     break;
@@ -102,8 +106,17 @@ public class Tela {
             }
         }
 
+        int digitos = String.valueOf(pontuacao).length();
+        String texto = Integer.toString(pontuacao);
+        while (texto.length() < 7) {
+            texto = '0' + texto;
+        }
+        g.setColor(Color.YELLOW);
+        g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 24));
+        FontMetrics fonte = g.getFontMetrics(g.getFont());
+        g.drawString("Pontuação: " + texto, pr.getWidth() - (16 * (texto.length() + 10)), fonte.getAscent());
+
         p1.updatePlayer(g);
-        
 
         g.dispose();
     }
