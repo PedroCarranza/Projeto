@@ -3,6 +3,7 @@ package Projeto;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -127,12 +128,19 @@ public class Menu {
                     }
                 }
                 pr.lis.gotChar = true;
-                Rectangle ret = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+                Rectangle ret = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, 4 * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
                 g.setColor(Color.WHITE);
-                g.draw(ret);
-                g.drawString(salvarnome.toString(), pr.getWidth() / 2 - pr.getWidth() / 8, 10 + pr.getHeight() / 8);
+                g.fill(ret);
+                g.setColor(Color.BLACK);
+                g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 20));
+                FontMetrics fonte = g.getFontMetrics(g.getFont());
+                g.drawString(salvarnome.toString(), pr.getWidth() / 2 - pr.getWidth() / 8, (fonte.getAscent() * 2 - fonte.getAscent() / 3) + 4 * pr.getHeight() / 8);
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Adicionar", pr));
+                g.drawImage(over, 0, 0, pr.getWidth(), 4 * pr.getHeight() / 8, pr);
                 break;
         }
 

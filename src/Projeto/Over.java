@@ -29,12 +29,13 @@ public class Over {
             saveantigo = new BufferedReader(new FileReader("save.txt"));
             temsave = true;
         } catch (FileNotFoundException ex) {
-            System.err.println("Não consegui abrir o save");
             temsave = false;
         }
     }
 
     public void Atualiza() {
+        System.out.println(pr.tela.pontuacao);
+        System.out.println(pr.tela.men.salvarnome);
         if (temsave) {
             try {
                 while (saveantigo.ready()) {
@@ -64,7 +65,7 @@ public class Over {
                         pontos.add(0, "" + pr.tela.pontuacao);
                     } else {
                         for (int i = 0; i < nomes.size(); i++) {
-                            if (pr.tela.pontuacao > Integer.parseInt("0"+pontos.get(i))) {
+                            if (pr.tela.pontuacao > Integer.parseInt("0" + pontos.get(i))) {
                                 for (int j = nomes.size(); j > i; j--) {
                                     nomes.add(j, nomes.get(j - 1));
                                     pontos.add(j, pontos.get(j - 1));
@@ -80,16 +81,17 @@ public class Over {
                         }
                     }
                 }
+                saveantigo.close();
 
                 savenovo = new BufferedWriter(new FileWriter("save.txt"));
 
                 for (int i = 0; i < nomes.size(); i++) {
                     savenovo.write(pr.tela.men.salvarnome.toString());
                     savenovo.newLine();
-                    savenovo.write(pr.tela.pontuacao);
+                    savenovo.write("" + pr.tela.pontuacao);
                     savenovo.newLine();
                 }
-                
+
                 savenovo.close();
             } catch (IOException ex) {
                 System.err.println("Problema na hora de salvar o ranking, ja era");
@@ -99,7 +101,7 @@ public class Over {
                 savenovo = new BufferedWriter(new FileWriter("save.txt"));
                 savenovo.write(pr.tela.men.salvarnome.toString());
                 savenovo.newLine();
-                savenovo.write(pr.tela.pontuacao);
+                savenovo.write("" + pr.tela.pontuacao);
                 savenovo.newLine();
                 savenovo.close();
             } catch (IOException ex) {

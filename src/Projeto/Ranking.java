@@ -18,7 +18,6 @@ public class Ranking {
 
     ArrayList<String> pontos = new ArrayList<>();
 
-
     Boolean abriu = false;
 
     public Ranking(Projeto pj) {
@@ -35,12 +34,11 @@ public class Ranking {
             abriu = true;
         } catch (FileNotFoundException e) {
             abriu = false;
-            System.err.println("N tem rank");
         }
         if (abriu) {
             g.drawString("Ranking:", pr.getWidth() / 2 - (12 * ("Ranking".length()) / 2), pr.getHeight() / 16 + fonte.getAscent());
             try {
-                
+
                 while (rank.ready()) {
                     nomes.add(rank.readLine());
                     pontos.add(rank.readLine());
@@ -67,9 +65,7 @@ public class Ranking {
                 rank.close();
             } catch (IOException ex) {
                 System.err.println("Não consegui fechar o ranking, me ajuda");
-            }catch(NullPointerException izi){
-                
-            }
+            } 
             nomes.clear();
             pontos.clear();
         } else {

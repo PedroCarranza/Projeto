@@ -123,9 +123,11 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     if (pr.tela.p2 != null) {
                         pr.tela.p2.hp = 3;
                     }
+                    pr.tela.men.ov.Atualiza();
                     pr.tela.men.salvarnome = new StringBuilder();
                     pr.tela.pontuacao = 0;
-                    pr.tela.men.ov.Atualiza();
+                    pr.tela.tiros.clear();
+                    pr.tela.inimigos.clear();
                     break;
                 }
 
