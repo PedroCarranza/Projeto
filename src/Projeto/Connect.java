@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -33,8 +35,10 @@ public class Connect extends Thread implements Runnable {
     @Override
     public void run() {
         running = true;
-        DataInputStream dIn = null;
-        DataOutputStream dOut = null;
+        //DataInputStream dIn = null;
+        //DataOutputStream dOut = null;
+        ObjectInputStream oIn = null;
+        ObjectOutputStream oOut = null;
         InputStream in;
         if (opt == 0) {
             Thread discoveryThread = new Thread(DiscoveryThread.getInstance());
@@ -45,8 +49,10 @@ public class Connect extends Thread implements Runnable {
                 Socket tmp = serv.accept();
                 System.out.println("Cliente conectado");
                 connec = true;
-                dIn = new DataInputStream(tmp.getInputStream());
-                dOut = new DataOutputStream(tmp.getOutputStream());
+                //dIn = new DataInputStream(tmp.getInputStream());
+                //dOut = new DataOutputStream(tmp.getOutputStream());
+                oIn = new ObjectInputStream(tmp.getInputStream());
+                oOut = new ObjectOutputStream(tmp.getOutputStream());
             } catch (IOException e) {
                 System.err.println("Não foi possível abrir o servidor");
             }
@@ -58,8 +64,10 @@ public class Connect extends Thread implements Runnable {
                 if (cli.isConnected()) {
                     System.out.println("Conectado");
                     connec = true;
-                    dIn = new DataInputStream(cli.getInputStream());
-                    dOut = new DataOutputStream(cli.getOutputStream());
+                    //dIn = new DataInputStream(cli.getInputStream());
+                    //dOut = new DataOutputStream(cli.getOutputStream());
+                    oIn = new ObjectInputStream(cli.getInputStream());
+                    oOut = new ObjectOutputStream(cli.getOutputStream());
                     pr.tela.estadoTela = 10;
                 }
             } catch (IOException ex) {
@@ -71,28 +79,31 @@ public class Connect extends Thread implements Runnable {
         while (running) {
 
             try {
-
-                dOut.writeInt(pr.tela.p1.px);
+                oOut.writeObject(pr.tela.p1);
+                /*dOut.writeInt(pr.tela.p1.px);
                 dOut.writeInt(pr.tela.p1.py);
                 dOut.writeBoolean(pr.lis.up);
                 dOut.writeBoolean(pr.lis.down);
                 dOut.writeBoolean(pr.lis.left);
                 dOut.writeBoolean(pr.lis.right);
-                dOut.writeBoolean(pr.lis.tiro);
-
-                pr.tela.p2.px = dIn.readInt();
+                dOut.writeBoolean(pr.lis.tiro);*/
+                
+                pr.tela.p2 = (Player2)oIn.readObject();
+                
+                /*pr.tela.p2.px = dIn.readInt();
                 pr.tela.p2.py = dIn.readInt();
                 pr.tela.p2.up = dIn.readBoolean();
                 pr.tela.p2.down = dIn.readBoolean();
                 pr.tela.p2.left = dIn.readBoolean();
                 pr.tela.p2.right = dIn.readBoolean();
-                pr.tela.p2.tiro = dIn.readBoolean();
-
+                pr.tela.p2.tiro = dIn.readBoolean();*/
             } catch (SocketException ex) {
                 System.err.println("Player disconectado");
                 connec = false;
                 pr.tela.p2 = null;
             } catch (IOException ex) {
+                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

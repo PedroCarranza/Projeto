@@ -113,7 +113,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     break;
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Ranking")) {
-                    estadoAnt = pr.tela.estadoTela;
+                    estadoAnt = 0;
                     pr.tela.estadoTela = 6;
                     break;
                 }
