@@ -51,8 +51,8 @@ public class Connect extends Thread implements Runnable {
                 connec = true;
                 //dIn = new DataInputStream(tmp.getInputStream());
                 //dOut = new DataOutputStream(tmp.getOutputStream());
-                oIn = new ObjectInputStream(tmp.getInputStream());
                 oOut = new ObjectOutputStream(tmp.getOutputStream());
+                oIn = new ObjectInputStream(tmp.getInputStream());
             } catch (IOException e) {
                 System.err.println("Não foi possível abrir o servidor");
             }
@@ -66,8 +66,8 @@ public class Connect extends Thread implements Runnable {
                     connec = true;
                     //dIn = new DataInputStream(cli.getInputStream());
                     //dOut = new DataOutputStream(cli.getOutputStream());
-                    oIn = new ObjectInputStream(cli.getInputStream());
                     oOut = new ObjectOutputStream(cli.getOutputStream());
+                    oIn = new ObjectInputStream(cli.getInputStream());
                     pr.tela.estadoTela = 10;
                 }
             } catch (IOException ex) {
