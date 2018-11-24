@@ -11,6 +11,7 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ public class Connect extends Thread implements Runnable {
     Projeto pr;
     boolean running, connec = false;
 
-    public Connect(int o,Projeto p) {
+    public Connect(int o, Projeto p) {
         opt = o;
         pr = p;
     }
@@ -68,9 +69,9 @@ public class Connect extends Thread implements Runnable {
         }
         pr.tela.p2 = new Player2(pr);
         while (running) {
-            
+
             try {
-                dOut.writeByte(1);
+
                 dOut.writeInt(pr.tela.p1.px);
                 dOut.writeInt(pr.tela.p1.py);
                 dOut.writeBoolean(pr.lis.up);
@@ -78,17 +79,19 @@ public class Connect extends Thread implements Runnable {
                 dOut.writeBoolean(pr.lis.left);
                 dOut.writeBoolean(pr.lis.right);
                 dOut.writeBoolean(pr.lis.tiro);
-                //String in = br.readLine();
-                if(dIn.readByte() == 1){
-                    pr.tela.p2.px = dIn.readInt();
-                    pr.tela.p2.py = dIn.readInt();
-                    pr.tela.p2.up = dIn.readBoolean();
-                    pr.tela.p2.down = dIn.readBoolean();
-                    pr.tela.p2.left = dIn.readBoolean();
-                    pr.tela.p2.right = dIn.readBoolean();
-                    pr.tela.p2.tiro = dIn.readBoolean();
-                }
-                
+
+                pr.tela.p2.px = dIn.readInt();
+                pr.tela.p2.py = dIn.readInt();
+                pr.tela.p2.up = dIn.readBoolean();
+                pr.tela.p2.down = dIn.readBoolean();
+                pr.tela.p2.left = dIn.readBoolean();
+                pr.tela.p2.right = dIn.readBoolean();
+                pr.tela.p2.tiro = dIn.readBoolean();
+
+            } catch (SocketException ex) {
+                System.err.println("Player disconectado");
+                connec = false;
+                pr.tela.p2 = null;
             } catch (IOException ex) {
                 Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
             }

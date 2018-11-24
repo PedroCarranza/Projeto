@@ -3,8 +3,8 @@ package Projeto;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class Menu {
 
     Ranking rank;
 
-    JTextField salvarnome = new JTextField();
+    StringBuilder salvarnome = new StringBuilder();
 
     Over ov;
 
@@ -40,8 +40,6 @@ public class Menu {
         rank = new Ranking(pr);
 
         ov = new Over(pr);
-
-        salvarnome.setPreferredSize(new Dimension(50, 20));
 
         try {
             pausebackground = ImageIO.read(new File("pauseback.png"));
@@ -72,7 +70,7 @@ public class Menu {
                 btns.add(new Botao("Ranking", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
-                g.drawImage(nome, pr.getWidth() / -pr.getWidth() / 4, pr.getHeight() / 16, pr.getWidth(), pr.getWidth() / 6, pr);
+                g.drawImage(nome, pr.getWidth() / 17 - pr.getWidth() / 17, pr.getHeight() / 80, pr.getWidth(), pr.getWidth() / 5, pr);
                 break;
             case 1:
                 btns.add(new Botao("Resumir", pr));
@@ -119,7 +117,20 @@ public class Menu {
                 rank.DrawRank(g);
                 break;
             case 7:
-                pr.add(salvarnome);
+                if (!pr.lis.gotChar) {
+                    if ((pr.lis.ch > 64 && pr.lis.ch < 91) || (pr.lis.ch > 96 && pr.lis.ch < 123) || pr.lis.ch == ' ') {
+                        salvarnome.append(pr.lis.ch);
+                    } else {
+                        if (salvarnome.length() > 0 && pr.lis.ch == 8) {
+                            salvarnome.deleteCharAt(salvarnome.length() - 1);
+                        }
+                    }
+                }
+                pr.lis.gotChar = true;
+                Rectangle ret = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+                g.setColor(Color.WHITE);
+                g.draw(ret);
+                g.drawString(salvarnome.toString(), pr.getWidth() / 2 - pr.getWidth() / 8, 10 + pr.getHeight() / 8);
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Adicionar", pr));
                 break;

@@ -9,7 +9,9 @@ import java.awt.event.MouseMotionListener;
 
 public class Listeners implements MouseListener, KeyListener, MouseMotionListener {
 
-    boolean up = false, down = false, left = false, right = false, stop = false, tiro = false;
+    boolean up = false, down = false, left = false, right = false, stop = false, tiro = false, gotChar = true;
+
+    char ch;
 
     boolean acaofeita;
 
@@ -117,6 +119,12 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 }
                 if (pr.tela.men.btns.get(i).getName().equals("Adicionar")) {
                     pr.tela.estadoTela = 0;
+                    pr.tela.p1.hp = 3;
+                    if (pr.tela.p2 != null) {
+                        pr.tela.p2.hp = 3;
+                    }
+                    pr.tela.men.salvarnome = new StringBuilder();
+                    pr.tela.pontuacao = 0;
                     pr.tela.men.ov.Atualiza();
                     break;
                 }
@@ -164,6 +172,10 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             tiro = true;
+        }
+        if (gotChar && pr.tela.estadoTela == 7) {
+            ch = e.getKeyChar();
+            gotChar = false;
         }
     }
 

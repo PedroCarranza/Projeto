@@ -1,6 +1,7 @@
 package Projeto;
 
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -10,8 +11,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Projeto extends JFrame implements Runnable {
@@ -58,6 +57,7 @@ public class Projeto extends JFrame implements Runnable {
         addMouseListener(lis);
         addMouseMotionListener(lis);
 
+        setLayout(new FlowLayout());
         setResizable(false);
         setUndecorated(true);
         setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
@@ -103,11 +103,10 @@ public class Projeto extends JFrame implements Runnable {
                 delta += Duration.between(last, now).getNano() / ns;
                 getContentPane().setCursor(blankCursor);
             } else {
-                tela.updatePaused();
                 try {
                     Thread.sleep(30);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(Projeto.class.getName()).log(Level.SEVERE, null, ex);
+                    System.err.println("Deu mto ruim");
                 }
                 getContentPane().setCursor(oldCursor);
             }
@@ -117,6 +116,7 @@ public class Projeto extends JFrame implements Runnable {
                 tela.update();
                 delta--;
             }
+            tela.draw();
             render();//sempre renderiza na tela
         }
     }
@@ -124,7 +124,6 @@ public class Projeto extends JFrame implements Runnable {
     public static void main(String[] args) {
         Projeto proj = new Projeto();
         proj.start();
-
     }
 
 }

@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Ranking {
 
@@ -20,29 +18,29 @@ public class Ranking {
 
     ArrayList<String> pontos = new ArrayList<>();
 
-    BufferedReader rank;
 
     Boolean abriu = false;
 
     public Ranking(Projeto pj) {
         pr = pj;
-
-        try {
-            rank = new BufferedReader(new FileReader("save.txt"));
-            abriu = true;
-        } catch (FileNotFoundException ex) {
-            System.err.print("NÃ£o tem save nÃ£o");
-            abriu = false;
-        }
     }
 
     public void DrawRank(Graphics2D g) {
+        BufferedReader rank = null;
         g.setColor(Color.yellow);
         g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 20));
         FontMetrics fonte = g.getFontMetrics(g.getFont());
+        try {
+            rank = new BufferedReader(new FileReader("save.txt"));
+            abriu = true;
+        } catch (FileNotFoundException e) {
+            abriu = false;
+            System.err.println("N tem rank");
+        }
         if (abriu) {
             g.drawString("Ranking:", pr.getWidth() / 2 - (12 * ("Ranking".length()) / 2), pr.getHeight() / 16 + fonte.getAscent());
             try {
+                
                 while (rank.ready()) {
                     nomes.add(rank.readLine());
                     pontos.add(rank.readLine());
@@ -69,7 +67,11 @@ public class Ranking {
                 rank.close();
             } catch (IOException ex) {
                 System.err.println("Não consegui fechar o ranking, me ajuda");
+            }catch(NullPointerException izi){
+                
             }
+            nomes.clear();
+            pontos.clear();
         } else {
             g.drawString("Não tem ranking salvo, jogue agora para criar o seu!",
                     pr.getWidth() / 2 - (12 * ("Não tem ranking salvo, jogue agora para criar o seu!".length())) / 2,

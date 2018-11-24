@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Over {
 
@@ -53,7 +51,7 @@ public class Over {
                                 nomes.remove(11);
                                 pontos.remove(11);
                             }
-                            nomes.add(i, pr.tela.men.salvarnome.getText());
+                            nomes.add(i, pr.tela.men.salvarnome.toString());
                             pontos.add(i, "" + pr.tela.pontuacao);
                             nomes.remove(11);
                             pontos.remove(11);
@@ -62,18 +60,18 @@ public class Over {
                     }
                 } else {
                     if (nomes.size() == 0) {
-                        nomes.add(0, pr.tela.men.salvarnome.getText());
+                        nomes.add(0, pr.tela.men.salvarnome.toString());
                         pontos.add(0, "" + pr.tela.pontuacao);
                     } else {
-                        for (int i = 0; i <= nomes.size(); i++) {
-                            if (pr.tela.pontuacao > Integer.parseInt(pontos.get(i))) {
+                        for (int i = 0; i < nomes.size(); i++) {
+                            if (pr.tela.pontuacao > Integer.parseInt("0"+pontos.get(i))) {
                                 for (int j = nomes.size(); j > i; j--) {
                                     nomes.add(j, nomes.get(j - 1));
                                     pontos.add(j, pontos.get(j - 1));
                                     nomes.remove(nomes.size() - 1);
                                     pontos.remove(pontos.size() - 1);
                                 }
-                                nomes.add(i, pr.tela.men.salvarnome.getText());
+                                nomes.add(i, pr.tela.men.salvarnome.toString());
                                 pontos.add(i, "" + pr.tela.pontuacao);
                                 nomes.remove(nomes.size() - 1);
                                 pontos.remove(pontos.size() - 1);
@@ -86,7 +84,7 @@ public class Over {
                 savenovo = new BufferedWriter(new FileWriter("save.txt"));
 
                 for (int i = 0; i < nomes.size(); i++) {
-                    savenovo.write(pr.tela.men.salvarnome.getText());
+                    savenovo.write(pr.tela.men.salvarnome.toString());
                     savenovo.newLine();
                     savenovo.write(pr.tela.pontuacao);
                     savenovo.newLine();
@@ -99,7 +97,7 @@ public class Over {
         } else {
             try {
                 savenovo = new BufferedWriter(new FileWriter("save.txt"));
-                savenovo.write(pr.tela.men.salvarnome.getText());
+                savenovo.write(pr.tela.men.salvarnome.toString());
                 savenovo.newLine();
                 savenovo.write(pr.tela.pontuacao);
                 savenovo.newLine();

@@ -11,14 +11,17 @@ import javax.imageio.ImageIO;
 public class Inimigo {
     int px,py;
     int hp = 3;
+    int pontos = 100;
     Projeto pr;
     BufferedImage sprites;
     int frame = 0, moveSpeed = 5;
     int scaler = 2;
-    public Inimigo(Projeto p){
+    int tipo;
+    public Inimigo(Projeto p, int t){
         pr = p;
         px = pr.getWidth()-200;
         py = pr.getHeight()-150;
+        tipo = t;
         try {
             sprites = ImageIO.read(new File("nmigo.png"));
         } catch (IOException e) {
@@ -33,23 +36,30 @@ public class Inimigo {
     public void dano(int d){
         hp -=d;
         if(hp<0){
+            pr.tela.pontuacao += pontos;
             pr.tela.inimigos.remove(this);
         }
     }
     
-    public void update(Graphics2D g){
+    public void draw(Graphics2D g){
+        scaler = pr.getHeight()/360;
+        g.drawImage(sprites.getSubimage(862 + 120 * (frame / 5), 21, 117, 89), px, py, 43 * scaler, 39 * scaler, null);
+    }
+    
+    public void update(){
         scaler = pr.getHeight()/360;
         moveSpeed = 3*scaler;
         frame++;
         if (frame > 14) {
             frame = 0;
         }
-        
-        if (py + 20*Math.sin(Instant.now().toEpochMilli()/1000) > 0 && py + 20*Math.sin(Instant.now().toEpochMilli()/1000)<pr.getHeight()-50) {
-            py += 5*Math.sin(Instant.now().toEpochMilli()/1000);
+        int fire = (int)(10*Math.random());
+        if(fire>8){
+            pr.tela.tiros.add(new Tiro(px, py, pr, 1));
         }
-        
-        g.drawImage(sprites.getSubimage(862 + 120 * (frame / 5), 21, 117, 89), px, py, 43 * scaler, 39 * scaler, null);
-            
+        int movIni = (int)(5*Math.sin(Instant.now().toEpochMilli()/1000));
+        if (py + movIni > 0 && py + movIni<pr.getHeight()-89) {
+            py += movIni;
+        }   
     }
 }
