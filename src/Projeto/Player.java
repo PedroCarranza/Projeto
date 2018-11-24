@@ -25,11 +25,6 @@ public class Player{
         }
     }
     
-    public String getData(){
-        return px + " " + py + " " + pr.lis.up + pr.lis.down;
-        
-    } 
-    
     public void dano(int i){
         hp -= i;
         if(hp<0 && (pr.tela.p2 == null || (pr.tela.p2 != null && pr.tela.p2.hp<0))){
