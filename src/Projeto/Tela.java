@@ -76,8 +76,9 @@ public class Tela {
     }
 
     public void update() {
-        //começa o timer se tiver parado
+        //Começa o timer se tiver parado
         if (estadoTela == 10) {
+
             if (!cliente) {
                 t.start();
                 //incrementa a posição do background

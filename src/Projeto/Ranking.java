@@ -36,9 +36,11 @@ public class Ranking {
             abriu = false;
         }
         if (abriu) {
+            //Desenha a frase do ranking na tela
             g.drawString("Ranking:", pr.getWidth() / 2 - (12 * ("Ranking".length()) / 2), pr.getHeight() / 16 + fonte.getAscent());
-            try {
 
+            //Lê o arquivo do ranking
+            try {
                 while (rank.ready()) {
                     nomes.add(rank.readLine());
                     pontos.add(rank.readLine());
@@ -46,8 +48,11 @@ public class Ranking {
             } catch (IOException ex) {
                 System.err.println("Não deu bom");
             }
+
             String texto;
             String textoaux;
+
+            //Formata o texto para ter sempre o mesmo espaçamento e desenha os nomes com os pontos
             for (int i = 0; i < nomes.size(); i++) {
                 texto = nomes.get(i);
                 while (texto.length() < 30) {
@@ -61,13 +66,18 @@ public class Ranking {
                 texto = texto + textoaux;
                 g.drawString(texto, pr.getWidth() / 2 - 42 * 6, pr.getHeight() / 16 + fonte.getAscent() + (i + 1) * pr.getHeight() / 16);
             }
+
+            //Tenta fechar o ranking
             try {
                 rank.close();
             } catch (IOException ex) {
                 System.err.println("Não consegui fechar o ranking, me ajuda");
-            } 
+            }
+
+            //Limpa as listas
             nomes.clear();
             pontos.clear();
+
         } else {
             g.drawString("Não tem ranking salvo, jogue agora para criar o seu!",
                     pr.getWidth() / 2 - (12 * ("Não tem ranking salvo, jogue agora para criar o seu!".length())) / 2,
