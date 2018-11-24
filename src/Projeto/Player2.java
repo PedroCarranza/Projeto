@@ -17,4 +17,27 @@ public class Player2 extends Player{
         super(p);
     }
     
+    @Override
+    public void drawPlayer(Graphics2D g){
+        if (up && !down) {
+            if (!left) {
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 5, 43, 35), px, py, 43 * scaler, 35 * scaler, null);
+            } else {
+                g.drawImage(sprites.getSubimage(321, 5, 36, 35), px + 12, py, 36 * scaler, 35 * scaler, null);
+            }
+        } else if (!up && down) {
+            if (!left) {
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 89, 43, 39), px, py, 43 * scaler, 39 * scaler, null);
+            } else {
+                g.drawImage(sprites.getSubimage(321, 89, 36, 39), px + 12, py, 36 * scaler, 39 * scaler, null);
+            }
+        } else {
+            if (!left) {
+                g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 42, 43, 39), px, py, 43 * scaler, 39 * scaler, null);
+            } else {
+                g.drawImage(sprites.getSubimage(321, 42, 36, 39), px + 12, py, 36 * scaler, 39 * scaler, null);
+            }
+        }
+    }
+    
 }

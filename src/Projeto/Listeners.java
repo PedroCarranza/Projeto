@@ -120,8 +120,12 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 if (pr.tela.men.btns.get(i).getName().equals("Adicionar")) {
                     pr.tela.estadoTela = 0;
                     pr.tela.p1.hp = 3;
+                    pr.tela.p1.px = 10;
+                    pr.tela.p1.py = pr.getHeight() / 2;
                     if (pr.tela.p2 != null) {
                         pr.tela.p2.hp = 3;
+                        pr.tela.p2.px = 10;
+                        pr.tela.p2.py = pr.getHeight() / 2;
                     }
                     pr.tela.men.ov.Atualiza();
                     pr.tela.men.salvarnome = new StringBuilder();

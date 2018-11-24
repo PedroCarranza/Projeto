@@ -22,6 +22,8 @@ public class Tela {
     Player p1;
     Player2 p2;
 
+    Dados dad;
+
     BufferedImage background;
 
     int bgdx = 0;
@@ -35,8 +37,11 @@ public class Tela {
     ArrayList<Inimigo> inimigos;
 
     Instant last;
+    Instant last2;
 
     Timer t;
+
+    boolean cliente = false;
 
     int pontuacao = 0;
     String texto = "";
@@ -54,10 +59,13 @@ public class Tela {
         inimigos = new ArrayList<>();
 
         last = Instant.now();
+        last2 = Instant.now();
 
         t = new Timer(10000, e -> {
             inimigos.add(new Inimigo(p, 0));
         });
+
+        dad = new Dados(pr);
 
         try {
             background = ImageIO.read(new File("back.png"));
@@ -70,57 +78,58 @@ public class Tela {
     public void update() {
         //começa o timer se tiver parado
         if (estadoTela == 10) {
-            t.start();
-            //incrementa a posição do background
-            bgdx += 8;
+            if (!cliente) {
+                t.start();
+                //incrementa a posição do background
+                bgdx += 8;
 
-            //Testa se deve atirar e se passou tempo sufisciente para sair o tiro
-            if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 500) {
-                last = Instant.now();
-                pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19 * pr.getHeight() / 360, pr, 0));
-            }
+                //Testa se deve atirar e se passou tempo sufisciente para sair o tiro
+                if (pr.lis.tiro && Duration.between(last, Instant.now()).toMillis() > 500) {
+                    last = Instant.now();
+                    pr.tela.tiros.add(new Tiro(pr.tela.p1.px + 32, pr.tela.p1.py + 19 * pr.getHeight() / 360, pr, 0));
+                }
 
-            //Testa se o player 2 deve atirar
-            if (p2 != null && p2.tiro && Duration.between(last, Instant.now()).toMillis() > 800) {
-                last = Instant.now();
-                pr.tela.tiros.add(new Tiro(p2.px + 32, p2.py + 19 * pr.getHeight() / 360, pr, 0));
-            }
+                //Testa se o player 2 deve atirar
+                if (p2 != null && p2.tiro && Duration.between(last2, Instant.now()).toMillis() > 500) {
+                    last2 = Instant.now();
+                    pr.tela.tiros.add(new Tiro(p2.px + 32, p2.py + 19 * pr.getHeight() / 360, pr, 0));
+                }
 
-            //Atualiza as posições dos tiros e verifica colisões
-            for (int i = 0; i < tiros.size(); i++) {
-                tiros.get(i).update();
-                if (tiros.get(i).t == 0) {
-                    for (int j = 0; j < inimigos.size(); j++) {
-                        if (inimigos.get(j).collided(tiros.get(i))) {
-                            inimigos.get(j).dano(1);
+                //Atualiza as posições dos tiros e verifica colisões
+                for (int i = 0; i < tiros.size(); i++) {
+                    tiros.get(i).update();
+                    if (tiros.get(i).t == 0) {
+                        for (int j = 0; j < inimigos.size(); j++) {
+                            if (inimigos.get(j).collided(tiros.get(i))) {
+                                inimigos.get(j).dano(1);
+                                tiros.get(i).remove = true;
+                                break;
+                            }
+                        }
+                    } else if (tiros.get(i).t == 1) {
+                        if (p1.collide(tiros.get(i))) {
+                            p1.dano(1);
                             tiros.get(i).remove = true;
-                            break;
+                        }
+                        if (p2 != null && p2.collide(tiros.get(i))) {
+                            p2.dano(1);
+                            tiros.get(i).remove = true;
                         }
                     }
-                } else if (tiros.get(i).t == 1) {
-                    if (p1.collide(tiros.get(i))) {
-                        p1.dano(1);
-                        tiros.get(i).remove = true;
-                    }
-                    if (p2 != null && p2.collide(tiros.get(i))) {
-                        p2.dano(1);
-                        tiros.get(i).remove = true;
+                }
+
+                //Remove os tiros que devem ser removidos
+                for (int i = 0; i < tiros.size(); i++) {
+                    if (tiros.get(i).remove) {
+                        tiros.remove(i);
                     }
                 }
-            }
 
-            //Remove os tiros que devem ser removidos
-            for (int i = 0; i < tiros.size(); i++) {
-                if (tiros.get(i).remove) {
-                    tiros.remove(i);
+                //Atualiza os inimigos
+                for (int i = 0; i < inimigos.size(); i++) {
+                    inimigos.get(i).update();
                 }
             }
-
-            //Atualiza os inimigos
-            for (int i = 0; i < inimigos.size(); i++) {
-                inimigos.get(i).update();
-            }
-
             //Atualiza a pontuação
             texto = Integer.toString(pontuacao);
             while (texto.length() < 7) {

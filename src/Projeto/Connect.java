@@ -79,7 +79,9 @@ public class Connect extends Thread implements Runnable {
         while (running) {
 
             try {
-                oOut.writeObject(pr.tela.p1);
+                Dados send = new Dados(pr);
+                send.getData();
+                oOut.writeObject(send);
                 /*dOut.writeInt(pr.tela.p1.px);
                 dOut.writeInt(pr.tela.p1.py);
                 dOut.writeBoolean(pr.lis.up);
@@ -88,7 +90,12 @@ public class Connect extends Thread implements Runnable {
                 dOut.writeBoolean(pr.lis.right);
                 dOut.writeBoolean(pr.lis.tiro);*/
                 
-                pr.tela.p2 = (Player2)oIn.readObject();
+                Dados recieve = (Dados)oIn.readObject();
+                if(opt == 0){
+                    recieve.setData();
+                }else if(opt == 1){
+                    recieve.setCliData();
+                }
                 
                 /*pr.tela.p2.px = dIn.readInt();
                 pr.tela.p2.py = dIn.readInt();
