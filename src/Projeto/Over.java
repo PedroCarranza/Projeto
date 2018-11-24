@@ -24,18 +24,16 @@ public class Over {
 
     public Over(Projeto pj) {
         pr = pj;
+    }
 
+    public void Atualiza() {
         try {
             saveantigo = new BufferedReader(new FileReader("save.txt"));
             temsave = true;
         } catch (FileNotFoundException ex) {
             temsave = false;
         }
-    }
 
-    public void Atualiza() {
-        System.out.println(pr.tela.pontuacao);
-        System.out.println(pr.tela.men.salvarnome);
         if (temsave) {
             try {
                 while (saveantigo.ready()) {
@@ -64,20 +62,17 @@ public class Over {
                         nomes.add(0, pr.tela.men.salvarnome.toString());
                         pontos.add(0, "" + pr.tela.pontuacao);
                     } else {
-                        for (int i = 0; i < nomes.size(); i++) {
-                            if (pr.tela.pontuacao > Integer.parseInt("0" + pontos.get(i))) {
-                                for (int j = nomes.size(); j > i; j--) {
-                                    nomes.add(j, nomes.get(j - 1));
-                                    pontos.add(j, pontos.get(j - 1));
-                                    nomes.remove(nomes.size() - 1);
-                                    pontos.remove(pontos.size() - 1);
-                                }
+                        int i;
+                        for (i = 0; i < nomes.size(); i++) {
+                            if (pr.tela.pontuacao > Integer.parseInt(pontos.get(i))) {
                                 nomes.add(i, pr.tela.men.salvarnome.toString());
                                 pontos.add(i, "" + pr.tela.pontuacao);
-                                nomes.remove(nomes.size() - 1);
-                                pontos.remove(pontos.size() - 1);
                                 break;
                             }
+                        }
+                        if (!nomes.contains(pr.tela.men.salvarnome.toString())) {
+                            nomes.add(i, pr.tela.men.salvarnome.toString());
+                            pontos.add(i, "" + pr.tela.pontuacao);
                         }
                     }
                 }
@@ -86,9 +81,9 @@ public class Over {
                 savenovo = new BufferedWriter(new FileWriter("save.txt"));
 
                 for (int i = 0; i < nomes.size(); i++) {
-                    savenovo.write(pr.tela.men.salvarnome.toString());
+                    savenovo.write(nomes.get(i));
                     savenovo.newLine();
-                    savenovo.write("" + pr.tela.pontuacao);
+                    savenovo.write(pontos.get(i));
                     savenovo.newLine();
                 }
 
@@ -108,6 +103,8 @@ public class Over {
                 System.err.println("Não consegui salvar, aborta!");
             }
         }
+        nomes.clear();
+        pontos.clear();
     }
 
 }
