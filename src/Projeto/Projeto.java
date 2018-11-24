@@ -103,6 +103,7 @@ public class Projeto extends JFrame implements Runnable {
                 delta += Duration.between(last, now).getNano() / ns;
                 getContentPane().setCursor(blankCursor);
             } else {
+                tela.t.stop();
                 try {
                     Thread.sleep(30);
                 } catch (InterruptedException ex) {
