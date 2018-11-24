@@ -68,10 +68,11 @@ public class Tela {
     }
 
     public void update() {
-        //começa o timer se tiver parado
+        //Começa o timer se tiver parado
         if (estadoTela == 10) {
             t.start();
-            //incrementa a posição do background
+            
+            //Incrementa a posição do background
             bgdx += 8;
 
             //Testa se deve atirar e se passou tempo sufisciente para sair o tiro
