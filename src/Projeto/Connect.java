@@ -1,7 +1,5 @@
 package Projeto;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -15,8 +13,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Connect extends Thread implements Runnable {
 
@@ -32,11 +28,10 @@ public class Connect extends Thread implements Runnable {
         pr = p;
     }
 
+    @SuppressWarnings("")
     @Override
     public void run() {
         running = true;
-        //DataInputStream dIn = null;
-        //DataOutputStream dOut = null;
         ObjectInputStream oIn = null;
         ObjectOutputStream oOut = null;
         InputStream in;
@@ -49,8 +44,6 @@ public class Connect extends Thread implements Runnable {
                 Socket tmp = serv.accept();
                 System.out.println("Cliente conectado");
                 connec = true;
-                //dIn = new DataInputStream(tmp.getInputStream());
-                //dOut = new DataOutputStream(tmp.getOutputStream());
                 oOut = new ObjectOutputStream(tmp.getOutputStream());
                 oIn = new ObjectInputStream(tmp.getInputStream());
             } catch (IOException e) {
@@ -64,8 +57,6 @@ public class Connect extends Thread implements Runnable {
                 if (cli.isConnected()) {
                     System.out.println("Conectado");
                     connec = true;
-                    //dIn = new DataInputStream(cli.getInputStream());
-                    //dOut = new DataOutputStream(cli.getOutputStream());
                     oOut = new ObjectOutputStream(cli.getOutputStream());
                     oIn = new ObjectInputStream(cli.getInputStream());
                     pr.tela.estadoTela = 10;
@@ -82,36 +73,21 @@ public class Connect extends Thread implements Runnable {
                 Dados send = new Dados(pr);
                 send.getData();
                 oOut.writeObject(send);
-                /*dOut.writeInt(pr.tela.p1.px);
-                dOut.writeInt(pr.tela.p1.py);
-                dOut.writeBoolean(pr.lis.up);
-                dOut.writeBoolean(pr.lis.down);
-                dOut.writeBoolean(pr.lis.left);
-                dOut.writeBoolean(pr.lis.right);
-                dOut.writeBoolean(pr.lis.tiro);*/
-                
-                Dados recieve = (Dados)oIn.readObject();
-                if(opt == 0){
+
+                Dados recieve = (Dados) oIn.readObject();
+                if (opt == 0) {
                     recieve.setData();
-                }else if(opt == 1){
+                } else if (opt == 1) {
                     recieve.setCliData();
                 }
-                
-                /*pr.tela.p2.px = dIn.readInt();
-                pr.tela.p2.py = dIn.readInt();
-                pr.tela.p2.up = dIn.readBoolean();
-                pr.tela.p2.down = dIn.readBoolean();
-                pr.tela.p2.left = dIn.readBoolean();
-                pr.tela.p2.right = dIn.readBoolean();
-                pr.tela.p2.tiro = dIn.readBoolean();*/
+
             } catch (SocketException ex) {
                 System.err.println("Player disconectado");
                 connec = false;
                 pr.tela.p2 = null;
-            } catch (IOException ex) {
-                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException | ClassNotFoundException ex) {
+                System.err.println("Deu ruim");
+                ex.printStackTrace();
             }
         }
     }
@@ -120,6 +96,8 @@ public class Connect extends Thread implements Runnable {
         try {
             serv.close();
             cli.close();
+            connec = false;
+            pr.tela.p2 = null;
         } catch (Exception e) {
 
         }
