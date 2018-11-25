@@ -57,7 +57,6 @@ public class Projeto extends JFrame implements Runnable {
         addMouseListener(lis);
         addMouseMotionListener(lis);
 
-        setLayout(new FlowLayout());
         setResizable(false);
         setUndecorated(true); // Tira as bordas
         setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
@@ -65,7 +64,7 @@ public class Projeto extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    private synchronized void start() {
+    private synchronized void start(){
         running = true;
         thread.start();
     }
