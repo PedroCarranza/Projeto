@@ -26,11 +26,6 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
     public void mousePressed(MouseEvent e) {
 
         Point ponto = e.getPoint();
@@ -109,22 +104,6 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (pr.tela.estadoTela == 10) {
@@ -174,13 +153,34 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
     }
 
     @Override
+    public void mouseMoved(MouseEvent e) {
+        mx = e.getX();
+        my = e.getY();
+    }
+
+    @Override
     public void mouseDragged(MouseEvent e) {
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        mx = e.getX();
-        my = e.getY();
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
     }
 
 }

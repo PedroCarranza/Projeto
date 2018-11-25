@@ -35,7 +35,6 @@ public class Tela {
     ArrayList<Inimigo> inimigos;
 
     Instant last;
-    Instant last2;
 
     Timer t;
     int cont = 0;
@@ -59,7 +58,6 @@ public class Tela {
         inimigos = new ArrayList<>();
 
         last = Instant.now();
-        last2 = Instant.now();
 
         t = new Timer(10000, e -> {
             if (cont >= 10) {
@@ -148,9 +146,6 @@ public class Tela {
 
         //Se não estiver pausado
         if (estadoTela == 10) {
-            //Limpa a tela com preto
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, pr.getWidth(), pr.getHeight());
 
             //Desenha background
             try {

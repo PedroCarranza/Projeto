@@ -15,6 +15,7 @@ public class Botao {
 
     public Botao(String n, Projeto p) {
         nome = n;
+        
         pr = p;
     }
 
@@ -29,11 +30,13 @@ public class Botao {
     public void drawBtn(Graphics2D g, int i) {
         if (!nome.equals("")) {
             Rectangle ret = new Rectangle(pr.getWidth() / 2 - pr.getWidth() / 8, (i + 1) * pr.getHeight() / 8, pr.getWidth() / 4, pr.getWidth() / 32);
+            
             if (ret.contains(pr.lis.mx, pr.lis.my)) {
                 g.setPaint(new GradientPaint(ret.x, ret.y, Color.WHITE, ret.x + ret.width, ret.y + ret.height, Color.BLACK));
             } else {
                 g.setPaint(new GradientPaint(ret.x, ret.y, Color.BLACK, ret.x + ret.width, ret.y + ret.height, Color.LIGHT_GRAY));
             }
+            
             g.fill(ret);
             g.setColor(Color.YELLOW);
             g.setFont(new Font(Font.MONOSPACED, Font.ITALIC+Font.BOLD, 16));
