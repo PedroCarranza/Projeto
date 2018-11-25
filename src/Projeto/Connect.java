@@ -76,9 +76,9 @@ public class Connect extends Thread implements Runnable {
 
                 Dados recieve = (Dados) oIn.readObject();
                 if (opt == 0) {
-                    recieve.setData();
+                    recieve.setData(pr);
                 } else if (opt == 1) {
-                    recieve.setCliData();
+                    recieve.setCliData(pr);
                 }
 
             } catch (SocketException ex) {
