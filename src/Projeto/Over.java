@@ -22,11 +22,15 @@ public class Over {
 
     Boolean temsave = false;
 
+    Boolean adicionou;
+
     public Over(Projeto pj) {
         pr = pj;
     }
 
     public void Atualiza() {
+        adicionou = false;
+
         try {
             saveantigo = new BufferedReader(new FileReader("save.txt"));
             temsave = true;
@@ -66,10 +70,11 @@ public class Over {
                             if (pr.tela.pontuacao > Integer.parseInt(pontos.get(i))) {
                                 nomes.add(i, pr.tela.men.salvarnome.toString());
                                 pontos.add(i, "" + pr.tela.pontuacao);
+                                adicionou = true;
                                 break;
                             }
                         }
-                        if (!nomes.contains(pr.tela.men.salvarnome.toString())) {
+                        if (!adicionou) {
                             nomes.add(i, pr.tela.men.salvarnome.toString());
                             pontos.add(i, "" + pr.tela.pontuacao);
                         }

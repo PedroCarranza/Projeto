@@ -1,7 +1,6 @@
 package Projeto;
 
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
