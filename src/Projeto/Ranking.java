@@ -26,15 +26,18 @@ public class Ranking {
 
     public void DrawRank(Graphics2D g) {
         BufferedReader rank = null;
+
         g.setColor(Color.yellow);
         g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 20));
         FontMetrics fonte = g.getFontMetrics(g.getFont());
+
         try {
             rank = new BufferedReader(new FileReader("save.txt"));
             abriu = true;
         } catch (FileNotFoundException e) {
             abriu = false;
         }
+
         if (abriu) {
             //Desenha a frase do ranking na tela
             g.drawString("Ranking:", pr.getWidth() / 2 - (12 * ("Ranking".length()) / 2), pr.getHeight() / 16 + fonte.getAscent());
@@ -55,14 +58,18 @@ public class Ranking {
             //Formata o texto para ter sempre o mesmo espaçamento e desenha os nomes com os pontos
             for (int i = 0; i < nomes.size(); i++) {
                 texto = nomes.get(i);
+
                 while (texto.length() < 30) {
                     texto = texto + " ";
                 }
+
                 texto = texto + "     ";
                 textoaux = pontos.get(i);
+
                 while (textoaux.length() < 7) {
                     textoaux = '0' + textoaux;
                 }
+
                 texto = texto + textoaux;
                 g.drawString(texto, pr.getWidth() / 2 - 42 * 6, pr.getHeight() / 16 + fonte.getAscent() + (i + 1) * pr.getHeight() / 16);
             }
@@ -79,9 +86,8 @@ public class Ranking {
             pontos.clear();
 
         } else {
-            g.drawString("Não tem ranking salvo, jogue agora para criar o seu!",
-                    pr.getWidth() / 2 - (12 * ("Não tem ranking salvo, jogue agora para criar o seu!".length())) / 2,
-                    pr.getHeight() / 8 + fonte.getAscent());
+            String frase = "Não tem ranking salvo, jogue agora para criar o seu!";
+            g.drawString(frase, pr.getWidth() / 2 - (12 * (frase.length())) / 2, pr.getHeight() / 8 + fonte.getAscent());
         }
     }
 
