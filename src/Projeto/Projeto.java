@@ -59,9 +59,9 @@ public class Projeto extends JFrame implements Runnable {
 
         setLayout(new FlowLayout());
         setResizable(false);
-        setUndecorated(true);
+        setUndecorated(true); // Tira as bordas
         setDefaultCloseOperation(3); // 3 = JFrame.EXIT_ON_CLOSE
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // Centraliza
         setVisible(true);
     }
 
