@@ -17,8 +17,6 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
 
     int estadoAnt;
 
-    Connect c;
-
     int moveSpeed = 5, mx = 0, my = 0;
 
     Projeto pr;
@@ -62,31 +60,6 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     pr.tela.estadoTela = 10;
                     break;
                 }
-                if (pr.tela.men.btns.get(i).getName().equals("LAN")) {
-                    estadoAnt = pr.tela.estadoTela;
-                    pr.tela.estadoTela = 3;
-                    break;
-                }
-                if (pr.tela.men.btns.get(i).getName().equals("Criar")) {
-                    pr.tela.estadoTela = 10;
-                    if (c != null) {
-                        c.close();
-                        c.running = false;
-                    }
-                    c = new Connect(0, pr);
-                    c.start();
-                    break;
-                }
-                if (pr.tela.men.btns.get(i).getName().equals("Entrar")) {
-                    pr.tela.estadoTela = 4;
-                    if (c != null) {
-                        c.close();
-                        c.running = false;
-                    }
-                    c = new Connect(1, pr);
-                    c.start();
-                    break;
-                }
                 if (pr.tela.men.btns.get(i).getName().equals("Alterar Resolução")) {
                     estadoAnt = pr.tela.estadoTela;
                     pr.tela.estadoTela = 5;
@@ -122,11 +95,6 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     pr.tela.p1.hp = 3;
                     pr.tela.p1.px = 10;
                     pr.tela.p1.py = pr.getHeight() / 2;
-                    if (pr.tela.p2 != null) {
-                        pr.tela.p2.hp = 3;
-                        pr.tela.p2.px = 10;
-                        pr.tela.p2.py = pr.getHeight() / 2;
-                    }
                     pr.tela.men.ov.Atualiza();
                     pr.tela.men.salvarnome = new StringBuilder();
                     pr.tela.pontuacao = 0;

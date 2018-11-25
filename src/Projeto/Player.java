@@ -7,16 +7,18 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Player{
-    int px,py,hp;
+public class Player {
+
+    int px, py, hp;
     Projeto pr;
     BufferedImage sprites;
     int frame = 0, moveSpeed = 5;
     int scaler = 2;
-    public Player(Projeto p){
+
+    public Player(Projeto p) {
         pr = p;
         px = 20;
-        py = pr.getHeight()/2;
+        py = pr.getHeight() / 2;
         hp = 3;
         try {
             sprites = ImageIO.read(new File("spsheet.png"));
@@ -24,21 +26,21 @@ public class Player{
             System.err.println("Imagem não encontrada");
         }
     }
-    
-    public void dano(int i){
+
+    public void dano(int i) {
         hp -= i;
-        if(hp<0 && (pr.tela.p2 == null || (pr.tela.p2 != null && pr.tela.p2.hp<0))){
+        if (hp <= 0) {
             pr.tela.estadoTela = 7;
         }
     }
-    
-    public boolean collide(Tiro t){
+
+    public boolean collide(Tiro t) {
         return new Rectangle(px, py, 43, 39).intersects(t.ret);
     }
-    
-    public void updatePlayer(){
-        scaler = pr.getHeight()/360;
-        moveSpeed = 3*scaler;
+
+    public void updatePlayer() {
+        scaler = pr.getHeight() / 360;
+        moveSpeed = 3 * scaler;
         frame++;
         if (frame > 9) {
             frame = 0;
@@ -49,15 +51,15 @@ public class Player{
         if (pr.lis.left && px - moveSpeed > 0) {
             px -= moveSpeed;
         }
-        if (pr.lis.down && py + 39 * scaler+ moveSpeed < pr.getHeight()) {
+        if (pr.lis.down && py + 39 * scaler + moveSpeed < pr.getHeight()) {
             py += moveSpeed;
         }
         if (pr.lis.up && py - moveSpeed > 0) {
             py -= moveSpeed;
         }
     }
-    
-    public void drawPlayer(Graphics2D g){
+
+    public void drawPlayer(Graphics2D g) {
         if (pr.lis.up && !pr.lis.down) {
             if (!pr.lis.left) {
                 g.drawImage(sprites.getSubimage(229 + 46 * (frame / 5), 5, 43, 35), px, py, 43 * scaler, 35 * scaler, null);

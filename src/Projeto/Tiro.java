@@ -3,14 +3,14 @@ package Projeto;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class Tiro {
+public class Tiro{
 
     Projeto pr;
     int x, y, t;
     Rectangle ret;
     boolean remove;
 
-    public Tiro(int x, int y, Projeto p, int tipo) {
+    public Tiro(int x, int y, Projeto p, int tipo){
         pr = p;
         remove = false;
         this.x = x;
@@ -39,7 +39,7 @@ public class Tiro {
             x -= 30;
         }
         ret.setLocation(x, y);
-        if (x > pr.getWidth()) {
+        if (x > pr.getWidth() || x<0) {
             remove = true;
         }
 

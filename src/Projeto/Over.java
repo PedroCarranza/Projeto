@@ -47,16 +47,10 @@ public class Over {
                 if (nomes.size() == 10) {
                     for (int i = 0; i < 10; i++) {
                         if (pr.tela.pontuacao > Integer.parseInt(pontos.get(i))) {
-                            for (int j = 9; j > i; j--) {
-                                nomes.add(j, nomes.get(j - 1));
-                                pontos.add(j, pontos.get(j - 1));
-                                nomes.remove(11);
-                                pontos.remove(11);
-                            }
                             nomes.add(i, pr.tela.men.salvarnome.toString());
                             pontos.add(i, "" + pr.tela.pontuacao);
-                            nomes.remove(11);
-                            pontos.remove(11);
+                            nomes.remove(10);
+                            pontos.remove(10);
                             break;
                         }
                     }

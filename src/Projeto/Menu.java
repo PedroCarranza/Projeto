@@ -1,7 +1,6 @@
 package Projeto;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
@@ -11,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.JTextField;
 
 public class Menu {
 
@@ -74,7 +72,6 @@ public class Menu {
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("Um Jogador", pr));
-                btns.add(new Botao("LAN", pr));
                 btns.add(new Botao("Ranking", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
@@ -98,23 +95,6 @@ public class Menu {
                 
                 //Desenha os comandos
                 g.drawImage(comandos, pr.getWidth() / 2 - pr.getWidth() / 6, pr.getHeight() / 8, pr.getWidth() / 3, pr.getWidth() / 5, pr);
-                break;
-            case 3:
-                //Menu LAN
-                btns.add(new Botao("Criar", pr));
-                btns.add(new Botao("Entrar", pr));
-                btns.add(new Botao("Voltar", pr));
-                break;
-            case 4:
-                //Menu tentando conectar LAN
-                g.setColor(Color.yellow);
-                g.setFont(new Font(Font.MONOSPACED, Font.ITALIC + Font.BOLD, 24));
-                g.drawString("Conectando...", pr.getWidth() / 3 - pr.getWidth() / 8, pr.getHeight() / 8);
-                btns.add(new Botao("", pr));
-                btns.add(new Botao("", pr));
-                btns.add(new Botao("", pr));
-                btns.add(new Botao("", pr));
-                btns.add(new Botao("Voltar", pr));
                 break;
             case 5:
                 //Alterar resolução
