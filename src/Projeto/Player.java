@@ -27,15 +27,19 @@ public class Player {
         }
     }
 
-    public void dano(int i) {
-        hp -= i;
+    public Rectangle getRet() {
+        return new Rectangle(px, py, 43, 39);
+    }
+
+    public void dano() {
+        hp--;
         if (hp <= 0) {
             pr.tela.estadoTela = 7;
         }
     }
 
     public boolean collide(Tiro t) {
-        return new Rectangle(px, py, 43, 39).intersects(t.ret);
+        return new Rectangle(px, py, scaler*43, scaler*39).intersects(t.ret);
     }
 
     public void updatePlayer() {

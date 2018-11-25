@@ -71,13 +71,14 @@ public class Menu {
                 //Menu principal
                 btns.add(new Botao("", pr));
                 btns.add(new Botao("", pr));
-                btns.add(new Botao("Um Jogador", pr));
+                btns.add(new Botao("", pr));
+                btns.add(new Botao("Jogar", pr));
                 btns.add(new Botao("Ranking", pr));
                 btns.add(new Botao("Alterar Resolução", pr));
                 btns.add(new Botao("Sair", pr));
                 
                 //Desenha o logo do jogo
-                g.drawImage(nome, pr.getWidth() / 17 - pr.getWidth() / 17, pr.getHeight() / 80, pr.getWidth(), pr.getWidth() / 5, pr);
+                g.drawImage(nome, pr.getWidth() / 17 - pr.getWidth() / 17, pr.getHeight() / 80, pr.getWidth(), pr.getHeight()/ 2, pr);
                 break;
             case 1:
                 //Pause

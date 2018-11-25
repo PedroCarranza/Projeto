@@ -40,7 +40,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                 if (pr.tela.men.btns.get(i).getName().equals("Sair")) {
                     System.exit(0);
                 }
-                if (pr.tela.men.btns.get(i).getName().equals("Um Jogador")) {
+                if (pr.tela.men.btns.get(i).getName().equals("Jogar")) {
                     pr.tela.estadoTela = 2;
                     break;
                 }
@@ -100,6 +100,7 @@ public class Listeners implements MouseListener, KeyListener, MouseMotionListene
                     pr.tela.pontuacao = 0;
                     pr.tela.tiros.clear();
                     pr.tela.inimigos.clear();
+                    pr.tela.cont = 0;
                     break;
                 }
 

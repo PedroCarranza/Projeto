@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -37,8 +38,10 @@ public class Tela {
     Instant last2;
 
     Timer t;
+    int cont = 0;
+    Random r = new Random();
 
-    boolean cliente = false;
+    boolean boss = false;
 
     int pontuacao = 0;
     String texto = "";
@@ -59,7 +62,14 @@ public class Tela {
         last2 = Instant.now();
 
         t = new Timer(10000, e -> {
-            inimigos.add(new Inimigo(p, 0));
+            if (cont >= 10) {
+                cont = 0;
+                inimigos.add(new Inimigo(p, 3));
+                boss = true;
+            } else if (!boss) {
+                inimigos.add(new Inimigo(p, r.nextInt(3)));
+                cont++;
+            }
         });
 
         try {
@@ -97,7 +107,7 @@ public class Tela {
                     }
                 } else if (tiros.get(i).t == 1) {
                     if (p1.collide(tiros.get(i))) {
-                        p1.dano(1);
+                        p1.dano();
                         tiros.get(i).remove = true;
                     }
                 }
@@ -112,6 +122,9 @@ public class Tela {
 
             //Atualiza os inimigos
             for (int i = 0; i < inimigos.size(); i++) {
+                if (inimigos.get(i).collide(p1.getRet())) {
+                    estadoTela = 7;
+                }
                 inimigos.get(i).update();
             }
 
